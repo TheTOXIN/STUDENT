@@ -1,0 +1,108 @@
+#include "iostream"
+#include "time.h"
+#include "math.h"
+#include "locale.h"
+
+using namespace std;
+
+//INPUT
+const int G = 2;//нагрузка
+const int I = 5;//инервал
+const int N = 10;//кол-во пакетов
+const int U = 4;//кол-во процессорв
+
+//OUTPUT
+double t_perfomence = 0;
+double e_perfomence = 0;
+int collision = 0;
+double main_time = 0;
+double pocket_time = 0;
+
+int pockets[N];
+
+double aloha() 
+{
+	return exp(-2 * G);
+}
+
+double clearAloha()
+{
+	return exp(-G);
+}
+
+void compute(double P) 
+{
+	int c_t = 0;
+	int c_f = 0;
+	
+	bool f = true;
+	for (int i = 0; i < N; i++) 
+	{
+		f = true;
+		do
+		{
+			double PR = (double)(rand()) / RAND_MAX;
+			if (PR <= P) 
+			{
+				c_t++;
+				f = false;
+			}
+			else
+			{
+				collision++;
+				c_f++;
+			}
+		} while(f);
+	}
+
+	double RG = ((c_t + c_f) * U * 1 / I) / N;
+
+	e_perfomence = RG * exp(-2 * RG);
+	t_perfomence = e_perfomence / U;
+
+	main_time = (c_t + c_f) * I;
+	pocket_time = (c_t + c_f) * I / N;
+}
+
+void output() 
+{
+	cout << "Теоритическое заначение производительности: " << t_perfomence << endl;
+	cout << "Опытное значение производительности: " << e_perfomence << endl;
+	cout << "Кол-во коллизий: " << collision << endl;
+	cout << "Общее время передачи кадров: " << main_time<< endl;
+	cout << "Вемя передачи одного кадра:" << pocket_time << endl;
+}
+
+void def() 
+{
+	t_perfomence = 0;
+	e_perfomence = 0;
+	collision = 0;
+	main_time = 0;
+	pocket_time = 0;
+}
+
+void main() 
+{
+	srand(time(NULL));
+	setlocale(0, "RUS");
+
+	cout << "VLATIK==HUYATIK" << endl;
+
+	double P = 0;
+	
+	cout << "-=ALOHA=-" << endl;
+	P = aloha();
+	compute(P);
+	output();
+
+	def();
+
+	cout << "-=CLEAR ALOHA=-" << endl;
+	P = clearAloha();
+	compute(P);
+	output();
+
+	system("pause");
+}
+

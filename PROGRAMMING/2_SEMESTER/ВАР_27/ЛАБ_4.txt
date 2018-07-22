@@ -1,0 +1,85 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <time.h>
+#include <windows.h>
+
+using namespace std;
+
+int** maker(int m, int n)
+{
+	int** t = new int*[m];
+	for (int i = 0; i < m; i++)
+	{
+		t[i] = new int[n];
+		for (int j = 0; j < n; j++)
+		{
+			t[i][j] = rand() % 18 - 9;
+		}
+	}
+	return t;
+}
+
+void printer(int m, int n, int **matr)
+{
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cout.width(4);
+			cout << matr[i][j];
+		}
+		cout << endl;
+	}
+}
+
+int search(int n, int **matr)
+{
+	int max = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (matr[i][i] > max)
+			max = matr[i][i];
+	}
+	return max;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	srand(time(NULL));
+
+	int n;
+	cout << "Введите четный размер матриц: " << endl;
+	cin >> n;
+
+	cout << "Матрица A :" << endl;
+	int **A = maker(n, n);
+	printer(n, n, A);
+
+	cout << "Матрица B :" << endl;
+	int **B = maker(n, n);
+	printer(n, n, B);
+
+	cout << "Массив С :" << endl;
+	int* C = new int[2];
+	C[0] = search(n, A);
+	C[1] = search(n, B);
+	cout << C[0] << ' ' << C[1] << endl;
+
+	for (int i = 0; i < n; i++)
+		delete[] A[i];
+	for (int i = 0; i < n; i++)
+		delete[] B[i];
+
+	delete[] A;
+	delete[] B;
+	delete[] C;
+
+	system("pause");
+	return 0;
+}

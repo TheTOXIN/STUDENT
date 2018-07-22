@@ -1,0 +1,115 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale>
+#include <string>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+struct Point
+{
+	int x;
+	int y;
+};
+
+const int N = 5;
+Point points[N];
+
+struct Node; 
+//описание типа указателя на элемент очереди 
+typedef Node* PNode; 
+//структура элемента очереди 
+struct Node 
+{ 
+	Point point;  
+	PNode Next; 
+};
+
+void Init(PNode& QB, PNode& QE, Point x)
+{ 
+	QE = new Node;  
+	QE->point = x;  
+	QE->Next = NULL;  
+	QB = QE; 
+}
+
+void Insert(PNode& QE, Point x) {
+	PNode p = new Node;
+	p->point = x;  
+	p->Next = NULL;  
+	QE->Next = p;  
+	QE = p;
+}
+
+void InputQueue(PNode& QB, PNode& QE) 
+{ 
+	Point Data;
+
+	Data.x = 0;
+	Data.y = 0;
+	Init(QB, QE, Data); 
+
+	int i = 0;
+	do 
+	{ 
+		Data.x = points[i].x;
+		Data.y = points[i].y;
+		if (Data.x < 0)
+			Insert(QE, Data);
+		i++;
+	} while (i < N);
+}
+
+int Empty(PNode QB) 
+{ 
+	return (!QB); 
+}
+
+void Remove(PNode& QB, Point& x) 
+{ 
+	if (Empty(QB)) 
+		cout << "Очередь пуста!";  
+	else 
+	{ 
+		PNode p;   
+		x = QB->point;   
+		p = QB;   
+		QB = QB->Next;   
+		delete p; 
+	} 
+}
+
+void PrintQueue(PNode QB) 
+{ 
+	Point Data;  
+	cout << "Очередь:\n";  
+	while (!Empty(QB)) 
+	{ 
+		Remove(QB, Data);   
+		cout << "x = " << Data.x << " - " << "y = " << Data.y << endl;
+	}  
+	cout << endl; 
+}
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+
+	cout << "Введите координаты " << N  << " точек" << endl;
+	for (int i = 0; i < N; i++)
+	{
+		cout << i+1 << ".x = ";
+		cin >> points[i].x;
+		cout << i + 1 << ".y = ";
+		cin >> points[i].y;
+	}
+
+	PNode QBegin, QEnd;  
+	InputQueue(QBegin, QEnd);  
+	PrintQueue(QBegin);
+
+	system("pause");
+	return 0;
+}

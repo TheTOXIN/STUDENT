@@ -1,0 +1,69 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include "string"
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+const int n = 3;
+double A[n];
+double B[n];
+
+void input(double m[], string name)
+{
+	ofstream fout(name, ios::binary);
+	cout << "Введите компоненты файла " << name << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> m[i];
+		fout.write((char*)m, sizeof(m));
+	}
+	fout.close();
+}
+
+void print(double m[], string name)
+{
+	ifstream fin(name, ios::binary);
+	cout << "Компоненты файла " << name << endl;
+	for (int i = 0; i < n; i++)
+	{
+		fin.read((char*)m, sizeof(m));
+		cout << m[i] << endl;
+	}
+	fin.close();
+}
+
+void check()
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (A[i] != B[i])
+		{
+			cout << "Компоненты файлов не равны" << endl;
+			break;
+		}
+
+		if (i == n-1)
+		{
+			cout << "Компоненты файлов равны" << endl;
+		}
+	}
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	input(A, "A.dat");
+	input(B, "B.dat");
+	print(A, "A.dat");
+	print(B, "B.dat");
+	check();
+
+	system("pause");
+	return 0;
+}

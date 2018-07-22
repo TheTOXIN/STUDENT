@@ -1,0 +1,59 @@
+#include "stdafx.h"
+#include <iostream>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+int main()
+{
+	const int n = 100, max_kol = 100; // n - максимальное кол.во символов в одном слове // max_kol - кол.во слов в массиве строк
+	int kol = 0;//kol - реальное кол.во строк
+	typedef char String[n];//создаем свой тип данных String через typedef (взято из методички)
+
+	String words[max_kol];//создаем массив строк размером max_kol
+
+	cout << "Input words: " << endl;
+	for (int i = 0; i < max_kol; i++)//вводим слова в массив через цикл, пока не напишем "end"
+	{
+		cin.getline(words[i], n);//вводим слово и добавляем в массив
+		if (strcmp(words[i], "end") == 0)//если слово "end" выходим из цикла
+			break;
+		kol++;//если ввели слово не равное "end" увеличиваем счетчик слов
+	}
+	cout << endl;
+
+	cout << "Your string: " << endl;//выводим строку слов пока не встретим в массиве "end"
+	for (int i = 0; strcmp(words[i], "end") != 0; i++)
+	{
+		cout << words[i] << ' ';
+	}
+	cout << endl << endl;
+
+	cout << "Sort string" << endl;
+	for (int i = 0; i < kol-1; i++) //сортируем массив через два цикла методом "пузырьком"
+	{
+		for (int j = i + 1; j < kol; j++)
+		{
+			if (strlen(words[i]) > strlen(words[j]))//если условие верное то меняем слова местами
+			{
+				String tmp;
+				strcpy_s(tmp, words[i]);
+				strcpy_s(words[i], words[j]);
+				strcpy_s(words[j], tmp);
+			}
+		}
+	}
+
+	for (int i = 0; strcmp(words[i], "end") != 0; i++)//выводим отсортированную строчку через цикл
+	{
+		cout << words[i] << ' ';
+	}
+	cout << endl << endl;
+
+	system("pause");
+	return 0;
+}

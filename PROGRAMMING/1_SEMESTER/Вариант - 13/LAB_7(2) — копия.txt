@@ -1,0 +1,73 @@
+#include <iostream>
+#include <math.h>
+#include <time.h>
+
+#pragma argsused
+
+int main()
+{
+	srand((unsigned)time(NULL)); //подключаем функцию rand()
+
+	const int m = 3;//m хранит размер квадратной матрицы
+	int M[m][m];
+
+	cout << "Your matrix:" << endl;
+	for (int i = 0; i < m; i++) //выводим матрицу через вложенный цикл 
+	{
+		for (int j = 0; j < m; j++) 
+		{
+			M[i][j] = rand() % 2;//присваиваем каждому элементу матрицы случайную цифру 1 или 0
+			cout << M[i][j] << " ";// выводим этот эелемент
+		}
+		cout << endl;
+	}
+
+	cout << "Numbers rows without 1 : ";
+	bool b = false;//эта переменаая будет нужна для проверки если у нас все строки юудут с 1
+	for (int i = 0; i < m; i++)
+	{
+		int count = 0;//считает количество 0 в строке
+
+		for (int j = 0; j < m; j++)
+		{
+			if (M[i][j] == 0)
+				count++;
+		}
+
+		if (count == m)//если в строке 5 нулей
+		{
+			cout << i << " ";//выводим номер этой строки
+			b = true;//b становится истинной
+		}
+	}
+	if (b == false)//если b ложь то говорим что таких строк нету
+		cout << "No such rows" << endl;
+	else
+		cout << endl;
+	//делаем точно такую же операциию но проверяем столбцы
+	cout << "Numbers columns without 1 : ";
+	for (int i = 0; i < m; i++)
+	{
+		int count = 0;
+
+		for (int j = 0; j < m; j++)
+		{
+			if (M[j][i] == 0)
+				count++;
+		}
+
+		if (count == m)
+		{
+			cout << i << " ";
+			b = true;
+		}
+		
+	}
+	if (b == false)
+		cout << "No such columns" << endl;
+	else
+		cout << endl;
+
+	getch();
+	return 0;
+}

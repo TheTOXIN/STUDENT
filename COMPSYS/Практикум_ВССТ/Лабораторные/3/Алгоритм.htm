@@ -1,0 +1,170 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="Алгоритм.files/filelist.xml">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>75</w:Zoom>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Arial Black";
+	panose-1:2 11 10 4 2 1 2 2 2 4;
+	mso-font-charset:204;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:647 0 0 0 159 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:2.0cm 42.5pt 2.0cm 3.0cm;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Обычная таблица";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white background="Лабораторная%203.files/fon.gif" lang=RU
+link=blue vlink=purple style='tab-interval:35.4pt' alink=3300FF>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><u><span
+style='font-family:"Arial Black";color:#993300'>Алгоритм<o:p></o:p></span></u></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Arial Black";color:#993300'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-family:"Arial Black";color:#993300'>МПС с
+индивидуальной памятью<o:p></o:p></span></i></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Arial Black"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt'><b
+style='mso-bidi-font-weight:normal'>В данном случае применяется один из методов
+«Управление ресурсами однопроцессорных систем оперативной обработки», т.е. </b><b
+style='mso-bidi-font-weight:normal'><span lang=EN-US style='mso-ansi-language:
+EN-US'>SPT</span>, </b><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='mso-ansi-language:EN-US'>RR</span> или </b><b style='mso-bidi-font-weight:
+normal'><span lang=EN-US style='mso-ansi-language:EN-US'>FB</span>, но только
+для каждого из </b><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='mso-ansi-language:EN-US'>N</span><span lang=EN-US> </span>процессоров данной
+МПС с индивидуальной памятью: создаются очереди для каждого процессора, все
+расчеты ведутся так же по каждому процессору в отдельности, а затем выводятся
+средние.<o:p></o:p></b></p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt'><b
+style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-family:"Arial Black";color:#993300;mso-bidi-font-weight:
+bold'>МПС с общей памятью</span><o:p></o:p></i></p>
+
+<p class=MsoNormal style='text-align:justify'><span
+style='mso-spacerun:yes'> </span></p>
+
+<p class=MsoNormal style='text-align:justify'><span style='mso-tab-count:1'>            </span><b
+style='mso-bidi-font-weight:normal'>При реализации работы МПС с общей памятью
+применяется один из методов «управления ресурсами многопроцессорных систем при
+обработке пакетов задач с прерываниями», т.е. <span class=SpellE>Макнотона</span>
+или LPT.<o:p></o:p></b></p>
+
+<p class=MsoNormal style='text-align:justify'><b style='mso-bidi-font-weight:
+normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-family:"Arial Black";mso-bidi-font-family:Arial;
+color:#993300'>Примечание<o:p></o:p></span></i></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Arial Black";mso-bidi-font-family:Arial;color:#993300'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span style='font-family:"Arial Black";
+mso-bidi-font-family:Arial;color:#993300'><span style='mso-tab-count:1'>         </span></span><span
+class=GramE><b style='mso-bidi-font-weight:normal'>Для дальнейшего
+сравнительного анализа «МПС с индивидуальной памятью» и «<span
+style='mso-bidi-font-weight:bold'>МПС с общей памятью» рекомендуется использовать
+одинаковые входные параметры и одинаковые очереди заявок, т.е. сперва
+сгенерировать очереди заявок для «</span>МПС с индивидуальной памятью» на </b><b
+style='mso-bidi-font-weight:normal'><span lang=EN-US style='mso-ansi-language:
+EN-US'>N</span> используемых процессоров, а затем объединить их в один массив
+заявок, для работы «<span style='mso-bidi-font-weight:bold'>МПС с общей памятью</span>».</b></span><b
+style='mso-bidi-font-weight:normal'><o:p></o:p></b></p>
+
+</div>
+
+</body>
+
+</html>

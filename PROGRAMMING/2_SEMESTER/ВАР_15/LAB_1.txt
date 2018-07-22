@@ -1,0 +1,52 @@
+#include "stdafx.h"
+#include <iostream>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+int main()
+{
+	const int n = 100, max_kol = 100;
+	int kol = 0;
+	typedef char String[n];
+
+	String words[max_kol];
+
+	cout << "Input string: " << endl;
+	for (int i = 0; i < max_kol; i++)
+	{
+		cin >> words[i];
+		if (strcmp(words[i], "end") == 0)
+			break;
+		kol++;
+	}
+	cout << endl;
+
+	cout << "Sort string" << endl;
+	for (int i = 0; i < kol - 1; i++)
+	{
+		for (int j = i + 1; j < kol; j++)
+		{
+			if (strlen(words[i]) > strlen(words[j]))
+			{
+				String tmp;
+				strcpy_s(tmp, words[i]);
+				strcpy_s(words[i], words[j]);
+				strcpy_s(words[j], tmp);
+			}
+		}
+	}
+
+	for (int i = 0; strcmp(words[i], "end") != 0; i++)
+	{
+		cout << words[i] << ' ';
+	}
+	cout << endl << endl;
+
+	system("pause");
+	return 0;
+}

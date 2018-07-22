@@ -1,0 +1,76 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <Windows.h>
+
+using namespace std;
+
+int main()
+{
+	setlocale(0, "RUS");
+	
+	int m[10];//создаем массив который может хранить 10 целых чисел
+	cout << "Введите элементы вашего массива: " << endl;
+	for (int i = 0; i < 10; i++)//вводим через цикл 10 элементов в наш массив и вывоодим их в консоль
+	{
+		cout << "Введите элемент номер - " << i << " : ";
+		cin >> m[i];
+	}
+	cout << "Индексы элементов, значения которых больше значения предыдущего элемента: " << endl;
+	for (int i = 1; i < 10; i++)//через этот цикл находим нужные элементы по условию и выводим индексы этих элементов
+	{
+		if (m[i] > m[i - 1])
+			cout << i << " ";
+	}
+	cout << endl;
+
+	system("pause");
+	return 0;
+}
+********************************************************************************
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <Windows.h>
+#include <time.h>
+
+using namespace std;
+
+int main()
+{
+	setlocale(0, "RUS");
+	srand((unsigned)time(NULL));//подключение функции rand()
+	
+	int A[4][4];
+	int B[4];
+
+	cout << "Массив A: " << endl;
+	for (int i = 0; i < 4; i++)//вложенный цикл для создания и вывода матрицы
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			A[i][j] = rand() % 18 - 9;//функция rand заполняет матрицу случайными числами от -9 до 9
+			cout << A[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	cout << "Массив B: " << endl;
+	for (int i = 0; i < 4; i++)//цикл на поиск в матрице первых отрицательных элементов в каждой строке 
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if (A[i][j] < 0)//если число меньше 0 то мы заносим его номер в массив B и выводим
+			{
+				B[j] = j;
+				cout << B[j] << " ";
+				break;//чтобы не проверять дргие отрицательные числа мы выходим из цикла
+			}
+		}
+	}
+
+	system("pause");
+	return 0;
+}

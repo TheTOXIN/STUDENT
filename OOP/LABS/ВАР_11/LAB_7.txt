@@ -1,0 +1,56 @@
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <string>
+#include <windows.h>
+#include <time.h>
+
+using namespace std;
+
+string decode(string str)
+{
+	string res = "";
+	
+	for (int i = 0; i < str.length(); i++)
+	{
+		res += (char)(rand() % 150);
+		res += (char)(rand() % 150);
+		res += str[i];
+	}
+
+	return res;
+}
+
+string encoding(string str)
+{
+	string res = "";
+
+	for (int i = 2; i < str.length(); i += 3)
+	{
+		res += str[i];
+	}
+
+	return res;
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	string text;
+	
+	cout << "Введите текст: " << endl;
+	cin >> text;
+
+	text = decode(text);
+	cout << "Кодирование: " << text << endl;
+
+	text = encoding(text);
+	cout << "Расшифровка: " << text << endl;
+
+	system("pause");
+	return 0;
+}

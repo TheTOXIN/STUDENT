@@ -1,0 +1,151 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+
+using namespace std;
+
+int tmp;
+int counter;
+
+struct element
+{
+	double k;
+	element* left;
+	element* right;
+};
+element *tree = NULL, *P, *Q;
+
+void maketree(double a)
+{
+	tree = new element;
+	tree->k = a;
+	tree->right = tree->left = NULL;
+	P = tree;
+	Q = NULL;
+}
+
+void add(double a) 
+{
+	if (!tree) {
+		maketree(a);
+		return;
+	}
+
+	P = Q = tree;
+
+	while (P != NULL)
+	{
+		Q = P;
+		if (a < P->k)
+			P = P->left;
+		else
+			P = P->right;
+	}
+
+	if (a < Q->k)
+	{
+		Q->left = new element;
+		Q->left->k = a;
+		Q->left->left = Q->left->right = NULL;
+
+	}
+	else
+	{
+		Q->right = new element;
+		Q->right->k = a;
+		Q->right->left = Q->right->right = NULL;
+	}
+}
+
+void printTree(element* tree)
+{
+	if (tree)
+	{
+		printTree(tree->left);
+		cout << tree->k << " - ";
+		printTree(tree->right);
+		cout << endl;
+	}
+}
+
+void inputTree()
+{
+	int count;
+	double n;
+	cout << "ÂÂÅÄÈÒÅ ÊÎË-ÂÎ ÝËÅÌÅÍÒÎÂ: " << endl;
+	cin >> count;
+
+	for (int i = 0; i < count; i++)
+	{
+		cout << "ÂÂÅÄÈÒÅ ÝËÅÌÅÍÒ ¹" << i << " :";
+		cin >> n;
+		add(n);
+	}
+	cout << endl;
+}
+
+void searchLeft(element* tree)
+{
+	if (tree)
+	{
+		searchLeft(tree->left);
+		if (tree->left == NULL) {
+			tmp = tree->k;
+		}
+	}
+}
+
+void replace(element* tree, double a)
+{
+	if (tree)
+	{
+		if (tree->k == a)
+			tree->k = tmp;
+		replace(tree->left, a);
+		replace(tree->right, a);
+	}
+}
+
+void seacrh(element* tree, double a)
+{
+	if (tree)
+	{
+		if (tree->k == a)
+			counter++;
+		seacrh(tree->left, a);
+		seacrh(tree->right, a);
+	}
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	double e;
+	counter = 0;
+
+	inputTree();
+	printTree(tree);
+
+	cout << "ÂÂÅÄÈÒÅ ÏÀÐÀÌÅÒÐ - E (äëÿ çàìåíû)" << endl;
+	cin >> e;
+	cout << endl;
+
+	searchLeft(tree);
+	replace(tree, e);
+	printTree(tree);
+
+	cout << "ÂÂÅÄÈÒÅ ÏÀÐÀÌÅÒÐ - E (äëÿ ïîäñ÷åòà âõîæäåíèé)" << endl;
+	cin >> e;
+	cout << endl;
+
+	seacrh(tree, e);
+
+	cout << "×ÈÑËÎ ÂÕÎÆÄÅÍÈÉ ÇÀÏÈÑÈ - E: = " << counter << endl;
+
+	system("pause");
+	return 0;
+}

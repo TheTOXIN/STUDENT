@@ -1,0 +1,103 @@
+#include "iostream";
+#include "string"
+#include "conio.h"
+#include "math.h"
+#include "windows.h"
+
+using namespace std;
+
+enum ConsoleColor
+{
+	Black = 0,
+	Blue = 1,
+	Green = 2,
+	Cyan = 3,
+	Red = 4,
+	Magenta = 5,
+	Brown = 6,
+	LightGray = 7,
+	DarkGray = 8,
+	LightBlue = 9,
+	LightGreen = 10,
+	LightCyan = 11,
+	LightRed = 12,
+	LightMagenta = 13,
+	Yellow = 14,
+	White = 15
+};
+
+class Window
+{
+public:
+	int x;
+	int y;
+	int backColor;
+	int textColor;
+	string text;
+	Window(int x, int y);
+	void setText(string text);
+	void setBackColor(int color);
+	void setTextColor(ConsoleColor color);
+	void outputText();
+	void changeSize(int w, int h);
+private:
+protected:
+};
+
+Window::Window(int x, int y)
+{
+	this->x = x;
+	this->y = y;
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD C; 
+	C.X = x;
+	C.Y = y;
+	SetConsoleCursorPosition(h, C);
+}
+
+void Window::setText(string text)
+{
+	this->text = text;
+}
+
+void Window::setBackColor(int color)
+{
+	string s = "color ";
+	s += to_string(color);
+	const char * chars = s.c_str();
+	system(chars);
+}
+
+void Window::setTextColor(ConsoleColor color)
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(handle, color);
+}
+
+void Window::outputText()
+{
+	cout << this->text << endl;
+}
+
+void Window::changeSize(int w, int h)
+{
+	HANDLE hWnd = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD bufferSize = { w, h };
+	SetConsoleScreenBufferSize(hWnd, bufferSize);
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	Window window(10, 10);
+	window.changeSize(100, 100);
+	window.setText("HELLO WORLD!!!");
+	window.setBackColor(20);
+	window.setTextColor(White);
+	window.outputText();
+
+	system("pause");
+	return 0;
+}

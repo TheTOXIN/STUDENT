@@ -1,0 +1,107 @@
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <time.h>
+#include <string>
+#include <conio.h>
+#include <stack>
+#include <set>
+#include <iterator>
+#include <windows.h>
+
+using namespace std;
+
+class Point//класс точка
+{
+public:
+	Point(double x, double y);//конструктор
+	int x;//координты точки
+	int y;
+};
+
+bool operator <(const Point s1, const Point s2)//перезагруженна€ функци€ дл€  ласса точки чтобы использовать его во множествах
+{
+	if (s1.x + s1.y > s2.x + s2.y)
+		return true;
+	return false;
+}
+
+Point::Point(double x, double y)//конструктор вызываетс€ при создании точки
+{
+	this->x = x;//присваиваем хначени€
+	this->y = y;
+}
+
+class Sircle//класс кргу тоже самое что и точка но с радиусом
+{
+public:
+	Sircle(double r, int x, int y);
+	int x;
+	int y;
+	double r;
+};
+
+Sircle::Sircle(double r, int x, int y)//конструтокр кргуа
+{
+	this->r = r;
+	this->x = x;
+	this->y = y;
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	set<Point> s1;//множество дл€ точек
+	set<Point> s2;//множество дл€ точек вход€щие в круг
+
+	Sircle sircle(8, 1, 1);//наша окружность
+
+	int N;
+	cout << "¬ведите кол-во точек :";
+	cin >> N;
+
+	for (int i = 0; i < N; i++)//заполн€ем множество точек
+	{
+		int x = rand() % 10 + 1;//случайными заначени€ми
+		int y = rand() % 10 + 1;
+
+		Point point(x, y);//создаем точку
+		s1.insert(point);//добовл€ем во множество
+	}
+	cout << endl;
+
+	cout << "“очки:" << endl;
+	//печатаем содержимое множества с помощью итератора
+	set<Point>::iterator it1;
+	for (it1 = s1.begin(); it1 != s1.end(); it1++)
+		cout << (*it1).x << ' ' << (*it1).y << endl;
+	
+	//ищем самую дальнюю точку через итератор
+	cout << "—ама€ дальн€€ точка:";
+	Point maxi(0, 0);//сама€ дальн€€ точка
+	set<Point>::iterator it2;
+	for (it2 = s1.begin(); it2 != s1.end(); it2++)
+		if (((*it2).x + (*it2).y > (maxi.x + maxi.y)))//сравниваем точку из итератора с maxi
+			maxi = (*it2);
+	cout << "X = " << maxi.x << " Y = " << maxi.y << endl;
+
+	//ищем точки вход€щие в окружность и добавл€ем их в другое множество
+	cout << "“очки вход€щие в окружность: " << endl;
+	set<Point>::iterator it3;
+	for (it3 = s1.begin(); it3 != s1.end(); it3++)
+		//пользуемс€ этой формулой - (x - x0)^2 + (y - y0)^2 <= R^2
+		if (pow(((*it3).x - sircle.x), 2) + pow(((*it3).y - sircle.y), 2) <= pow(sircle.r, 2))
+			s2.insert((*it3));
+	//печатаем содержимое второго множества с помощью итератора
+	set<Point>::iterator it4;
+	for (it4 = s2.begin(); it4 != s2.end(); it4++)
+		cout << (*it4).x << ' ' << (*it4).y << endl;
+
+	system("pause");
+	return 0;
+}
+

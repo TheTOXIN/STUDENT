@@ -1,0 +1,71 @@
+#include "stdafx.h"
+#include "iostream"
+#include <math.h>
+#include "string"
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+const int kol = 5;
+int countENG = 0;
+int countRUS = 0;
+
+void input(string txt[kol], string s)
+{
+	ofstream fout(s);
+	for (int i = 0; i < kol; i++)
+	{
+		cin >> txt[i];
+		fout << txt[i] << endl;
+	}
+	cout << endl;
+}
+
+void output(string txt[kol], string s)
+{
+	ifstream fin(s);
+	for (int i = 0; i < kol; i++)
+	{
+		fin >> txt[i];
+		cout << txt[i] << endl;
+	}
+	cout << endl;
+}
+
+void counter(string txt[kol])
+{
+	for (int i = 0; i < kol; i++)
+	{
+		for (int j = 0; j < txt[i].length(); j++)
+		{
+			if (txt[i][j] >= 'a' && txt[i][j] <= 'z' || txt[i][j] >= 'A' && txt[i][j] <= 'Z')
+				countENG++;
+			if (txt[i][j] >= 'à' && txt[i][j] <= 'ÿ' || txt[i][j] >= 'À' && txt[i][j] <= 'ß')
+				countRUS++;
+		}
+	}
+
+	double countCHAR = countENG + countRUS;
+	double percentEng = 100 / countCHAR * countENG;
+	double percentRus = 100 / countCHAR * countRUS;
+	cout << "CountENG = " << countENG << " = " << percentEng << "%" << endl;
+	cout << "CountRUS = " << countRUS << " = " << percentRus << "%" << endl;
+	cout << endl;
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	string txt[kol];
+	cout << "Input text for file \"data.txt\"" << endl;
+	input(txt, "data.txt");
+	counter(txt);
+	cout << "Text of file \"data.txt\"" << endl;
+	output(txt, "data.txt");
+
+	system("pause");
+	return 0;
+}

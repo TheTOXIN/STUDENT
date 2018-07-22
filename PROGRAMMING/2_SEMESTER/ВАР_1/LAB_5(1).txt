@@ -1,0 +1,71 @@
+#include "stdafx.h"
+#include "iostream"
+#include <math.h>
+#include "string"
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+const int kol = 5;//кол-во строк
+int countENG = 0;//кол-во англ.символов
+int countRUS = 0;//кол-во русс.символов
+
+void input(string txt[kol], string s)//функция для ввода файла
+{
+	ofstream fout(s);//открываем поток для вывода в файл
+	for (int i = 0; i < kol; i++)
+	{
+		cin >> txt[i];//вводим строку в массив
+		fout << txt[i] << endl;//выводим строку в файл
+	}
+	cout << endl;
+}
+
+void output(string txt[kol], string s)//функция для вывода файла
+{
+	ifstream fin(s);//открываем поток для чтения файла
+	for (int i = 0; i < kol; i++)
+	{
+		fin >> txt[i];//считываем строку
+		cout << txt[i] << endl;//выводим её
+	}
+	cout << endl;
+}
+
+void counter(string txt[kol])//функция для подсчета процентов
+{
+	for (int i = 0; i < kol; i++)//пробегаемся по каждой строчке
+	{
+		for (int j = 0; j < txt[i].length(); j++)//пробегаемся по каждому в символу в строчке
+		{
+			if (txt[i][j] >= 'a' && txt[i][j] <= 'z' || txt[i][j] >= 'A' && txt[i][j] <= 'Z')//если символ воходит в диапазон латинских
+				countENG++;//увеличивыаем счетчки
+			if (txt[i][j] >= 'а' && txt[i][j] <= 'я' || txt[i][j] >= 'А' && txt[i][j] <= 'Я')//если символ воходит в диапазон русских
+				countRUS++;//увеличивыаем счетчки
+		}
+	}
+
+	double countCHAR = countENG + countRUS;//кол-во всего символов
+	double percentEng = 100 / countCHAR * countENG;//считаем проценты
+	double percentRus = 100 / countCHAR * countRUS;//считаем проценты
+	cout << "CountENG = " << countENG << " = " << percentEng << "%" << endl;
+	cout << "CountRUS = " << countRUS << " = " << percentRus << "%" << endl;
+	cout << endl;
+}
+
+int main()
+{
+	SetConsoleCP(1251);//ставим русский язык для консоли
+	SetConsoleOutputCP(1251);//ставим русский язык для консоли
+
+	string txt[kol];//массив строк для текста
+	cout << "Input text for file \"data.txt\"" << endl;
+	input(txt, "data.txt");//вызываем функцию для создания файла и ввода текста
+	counter(txt);//считаем проценты
+	cout << "Text of file \"data.txt\"" << endl;
+	output(txt, "data.txt");//выводим файл
+
+	system("pause");
+	return 0;
+}

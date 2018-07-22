@@ -1,0 +1,76 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+int main()
+{
+	//setlocale(LC_ALL, "Russian_Russia.866");
+	const int n = 100, kol = 100;
+	int count;
+	typedef char String[n];
+
+	String words[kol];
+
+	cout << "Input count words: " << endl;
+	cin >> count;
+	count++;
+
+	cout << "Input words: " << endl;
+	for (int i = 0; i < count; i++)
+	{
+		cin.getline(words[i], n);
+	}
+	cout << endl;
+
+	cout << "List of words: ";
+	for (int i = 0; i < count; i++)
+	{
+		cout << words[i] << endl;
+	}
+	cout << endl;
+
+	cout << "List of correct words: " << endl;
+	for (int i = 0; i < count; i++)
+	{
+		int len = strlen(words[i]);
+
+		for (int j = 0; j < len - 1; j++)
+		{
+			if (words[i][j] == 'z' || words[i][j] == 'h')
+			{
+				if (words[i][j+1] == 'u')
+				{
+					words[i][j+1] = 'e';
+				}
+			}
+			//z-æ h-ø u-û e-è c-÷ j-ù q-þ y-ó i-ÿ a-a 
+			if (words[i][j] == 'c' || words[i][j] == 'j')
+			{
+				if (words[i][j+1] == 'q')
+				{
+					words[i][j+1] = 'y';
+				}
+				if (words[i][j+1] == 'i')
+				{
+					words[i][j+1] = 'a';
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < count; i++)
+	{
+		cout << words[i] << endl;
+	}
+	cout << endl;
+
+	system("pause");
+	return 0;
+}

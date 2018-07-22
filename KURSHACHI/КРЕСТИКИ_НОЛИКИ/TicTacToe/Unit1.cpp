@@ -1,0 +1,235 @@
+//---------------------------------------------------------------------------
+#include <vcl.h>
+#pragma hdrstop
+#include "Unit1.h"
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+//---------------------------------------------------------------------------
+TForm1 *Form1;
+int Game[3][3]; //Игровое поле
+bool EndOfGame; //перменная типа булиан, true - если игра закончена иначе false
+bool isBotON; //для включения и выкючения бота
+//---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner) : TForm(Owner)//функция вызывается при запуске программы
+{
+	for(int j=0;j<3;j++)//пробегаемся через два цикла
+		for(int i=0;i<3;i++)
+			Game[i][j]=0;//и присваиваем элементам матрице 0
+
+	Krestik = new Graphics::TBitmap();//переменная текстуры (описанна в Unit1.h)
+	Krestik->LoadFromFile("Krestik.bmp");//загружаем текстуру
+	Krestik->Transparent=true;//делаем текстуру не маштабируемой
+
+	Nolik = new Graphics::TBitmap();//тоже самое теперь для текстуры нолика
+	Nolik->LoadFromFile("Nolik.bmp");
+	Nolik->Transparent=true;
+
+	Canvas->Pen->Width=10;//берем холст Canvas и ставим у его ручки Pen ширину 5 для рисования линий
+	ViktoryLine1=Point(-1,-1);//присваиваем переменной ViktoryLine1(описанна в Unit1.h) координаты
+	ViktoryLine2=Point(-1,-1);//тоже самое для ViktoryLine2
+	EndOfGame = false;//ставим false, тосеть игра не закончена
+	isBotON = true;
+}
+//---------------------------------------------------------------------------
+TForm1::DrawKresikAndNolik()//функция отрисовки
+{
+	Canvas->Brush->Color = clWhite;//ставим на ксить цвет
+	Canvas->Rectangle(-10,-10,500,500);//закрышиваем фон
+
+	Canvas->Pen->Color = clBlack;
+	Canvas->MoveTo(100,10);//изменяем позицию ручки в холсте
+	Canvas->LineTo(100,290);//и рисуем линию от позици ручки до этих координат
+	Canvas->MoveTo(200,10) ;//дальше повторяем все тоже самое
+	Canvas->LineTo(200,290);//таким образом рисуем 4 линии
+	Canvas->MoveTo(10,100) ;
+	Canvas->LineTo(290,100);
+	Canvas->MoveTo(10,200) ;
+	Canvas->LineTo(290,200);
+
+	for(int j=0;j<3;j++)//пробегаемся по массиву игры
+		for(int i=0;i<3;i++)
+			if(Game[i][j]==1)//если элемент равен 1 рисуем крестк на холсте с координатами по j и i
+				Canvas->Draw(i*100+10,j*100+10,Krestik);
+			else if(Game[i][j]==2)//если 2 до нолик
+				Canvas->Draw(i*100+10,j*100+10,Nolik);
+
+	if(ViktoryLine1.x != -1)//рисуем лини зачеркивающие фигурки если это нужно
+	{
+		Canvas->Pen->Color=clGreen;//стави зеленый цвет
+		Canvas->MoveTo(ViktoryLine1.x*100+50,ViktoryLine1.y*100+50);//рисуем линнии
+		Canvas->LineTo(ViktoryLine2.x*100+50,ViktoryLine2.y*100+50);//в зависмости от ViktoryLine1 и 2
+		Canvas->Pen->Color=clBlack;
+	}
+ 	return 0;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::FormPaint(TObject *Sender)//функция вызывает функцию отрисовки DrawKresikAndNolik
+{
+	DrawKresikAndNolik();
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::FormMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+{//функция вызывается при нажатии на кнопку мыши
+	if(!EndOfGame)//если игра не закончена
+	{
+		int KletkaX = X / (100);//высчитываем координаты по клеткам
+		int KletkaY = Y / (100);//берем координаты мышки и делим на 100
+		if((Game[KletkaX][KletkaY]!=2)&&(Game[KletkaX][KletkaY]!=1))//есди в  этих клеток нету фигурки
+		{
+			if(Button==mbLeft)Game[KletkaX][KletkaY]=1;//ставим в матрицу 1 если левая кнопка мыши
+			if(Button==mbRight)Game[KletkaX][KletkaY]=2;//ставим 2 если правая
+			int viktory=TestForVictory();//вызываем функию проверки победы
+			Repaint();//перерисвываем холст
+			//взовисимости от типа победы показываем окно
+			if(viktory==1){ShowMessage("Ваша победа");EndOfGame=true;}else
+			if(viktory==3){ShowMessage("Ничья");EndOfGame=true;}else
+			if(viktory==2){ShowMessage("Победа компьютера");EndOfGame=true;
+			}
+			else//иначе есл иникто не победил
+			{
+				Sleep(300);
+				if (isBotON)
+					HodComputera();//вызываем функцию в которой ходит компьютер
+				viktory=TestForVictory();//и все тоже самое
+				Repaint();
+				if(viktory==1){ShowMessage("Ваша победа");EndOfGame=true;}else
+				if(viktory==3){ShowMessage("Ничья");EndOfGame=true;}else
+				if(viktory==2){ShowMessage("Победа компьютера");EndOfGame=true;}
+			}
+		}
+	}
+}
+//---------------------------------------------------------------------------
+TForm1::HodComputera()//функция ищет подходящий ход
+{
+	//Поиск ситуаций, когда один ход сразу же принесет победу (0 0)
+	for(int i=0;i<3;i++)
+	{
+		if((Game[0][i]==2)&&(Game[1][i]==2)&&(Game[2][i]==0)){Game[2][i]=2;return 0;} //110
+		else if((Game[1][i]==2)&&(Game[2][i]==2)&&(Game[0][i]==0)){Game[0][i]=2;return 0;} //011
+		else if((Game[0][i]==2)&&(Game[2][i]==2)&&(Game[1][i]==0)){Game[1][i]=2;return 0;} //101
+		else if((Game[i][0]==2)&&(Game[i][1]==2)&&(Game[i][2]==0)){Game[i][2]=2;return 0;} //110
+		else if((Game[i][1]==2)&&(Game[i][2]==2)&&(Game[i][0]==0)){Game[i][0]=2;return 0;} //011
+		else if((Game[i][0]==2)&&(Game[i][2]==2)&&(Game[i][1]==0)){Game[i][1]=2;return 0;} //101
+	}
+
+	//Диагональ слева направо
+	if((Game[0][0]==2)&&(Game[1][1]==2)&&(Game[2][2]==0)){Game[2][2]=2;return 0;} //110
+	else if((Game[1][1]==2)&&(Game[2][2]==2)&&(Game[0][0]==0)){Game[0][0]=2;return 0;} //011
+	else if((Game[0][0]==2)&&(Game[2][2]==2)&&(Game[1][1]==0)){Game[1][1]=2;return 0;} //101
+	else if((Game[2][0]==2)&&(Game[1][1]==2)&&(Game[0][2]==0)){Game[0][2]=2;return 0;} //110
+	else if((Game[1][1]==2)&&(Game[0][2]==2)&&(Game[2][0]==0)){Game[2][0]=2;return 0;} //011
+	else if((Game[2][0]==2)&&(Game[0][2]==2)&&(Game[1][1]==0)){Game[1][1]=2;return 0;} //101
+
+	//Поиск опасных ситуаций  типа XX
+	for(int i=0;i<3;i++)
+	{
+		if((Game[0][i]==1)&&(Game[1][i]==1)&&(Game[2][i]==0)){Game[2][i]=2;return 0;} //110
+		else if((Game[1][i]==1)&&(Game[2][i]==1)&&(Game[0][i]==0)){Game[0][i]=2;return 0;} //011
+		else if((Game[0][i]==1)&&(Game[2][i]==1)&&(Game[1][i]==0)){Game[1][i]=2;return 0;} //101
+		else if((Game[i][0]==1)&&(Game[i][1]==1)&&(Game[i][2]==0)){Game[i][2]=2;return 0;} //110
+		else if((Game[i][1]==1)&&(Game[i][2]==1)&&(Game[i][0]==0)){Game[i][0]=2;return 0;} //011
+		else if((Game[i][0]==1)&&(Game[i][2]==1)&&(Game[i][1]==0)){Game[i][1]=2;return 0;} //101
+	}
+
+	//Диагональ слева направо
+	if((Game[0][0]==1)&&(Game[1][1]==1)&&(Game[2][2]==0)){Game[2][2]=2;return 0;} //110
+	else if((Game[1][1]==1)&&(Game[2][2]==1)&&(Game[0][0]==0)){Game[0][0]=2;return 0;} //011
+	else if((Game[0][0]==1)&&(Game[2][2]==1)&&(Game[1][1]==0)){Game[1][1]=2;return 0;} //101
+	else
+
+	//Диагональ справа на лево
+	if((Game[2][0]==1)&&(Game[1][1]==1)&&(Game[0][2]==0)){Game[0][2]=2;return 0;} //110
+	else if((Game[1][1]==1)&&(Game[0][2]==1)&&(Game[2][0]==0)){Game[2][0]=2;return 0;} //011
+	else if((Game[2][0]==1)&&(Game[0][2]==1)&&(Game[1][1]==0)){Game[1][1]=2;return 0;} //101
+
+ 	if(Game[1][1]==0){Game[1][1]=2;return 0;}
+	for(int j=0;j<3;j++)
+		for(int i=0;i<3;i++)
+			if(Game[i][j]==0){Game[i][j]=2;return 0;}
+return 0;
+}
+//---------------------------------------------------------------------------
+int TForm1::TestForVictory()//функция проверки победы
+//функция возрщет 1 если победа человека, 2 - компьютер, 3 - ничья
+{
+	//циклом перебираем все возможные варинаты победы
+	//и ставим координаты линни зачеркивания в зависимости от победы
+	for(int i=0;i<3;i++)
+	{
+		if((Game[i][0]==1)&&(Game[i][1]==1)&&(Game[i][2]==1))
+			{ViktoryLine1=Point(i,0);ViktoryLine2=Point(i,2);return 1;}
+		if((Game[0][i]==1)&&(Game[1][i]==1)&&(Game[2][i]==1))
+			{ViktoryLine1=Point(0,i);ViktoryLine2=Point(2,i);return 1;}
+		if((Game[i][0]==2)&&(Game[i][1]==2)&&(Game[i][2]==2))
+			{ViktoryLine1=Point(i,0);ViktoryLine2=Point(i,2);return 2;}
+		if((Game[0][i]==2)&&(Game[1][i]==2)&&(Game[2][i]==2))
+			{ViktoryLine1=Point(0,i);ViktoryLine2=Point(2,i);return 2;}
+	}
+	//проверка для диагоналей
+	if((Game[0][0]==1)&&(Game[1][1]==1)&&(Game[2][2]==1))
+		{ViktoryLine1=Point(0,0);ViktoryLine2=Point(2,2);return 1;}
+	if((Game[2][0]==1)&&(Game[1][1]==1)&&(Game[0][2]==1))
+		{ViktoryLine1=Point(2,0);ViktoryLine2=Point(0,2);return 1;}
+	if((Game[0][0]==2)&&(Game[1][1]==2)&&(Game[2][2]==2))
+		{ViktoryLine1=Point(0,0);ViktoryLine2=Point(2,2);return 2;}
+	if((Game[2][0]==2)&&(Game[1][1]==2)&&(Game[0][2]==2))
+		{ViktoryLine1=Point(2,0);ViktoryLine2=Point(0,2);return 2;}
+
+	if(!EndOfGame)//если игра не закончена
+	{
+		bool err=false;//проверяем ходы на ничью занося в err
+
+		for(int j=0;j<3;j++)
+			for(int i=0;i<3;i++)
+				if(Game[i][j]==0)
+					err=true;
+
+		if(err==false)
+			return 3;
+	}
+	return 0;
+}
+//---------------------------------------------------------------------------
+void TForm1::NewGame()//функция новый игры
+{
+	for(int j=0;j<3;j++)//присваиваем нули марицы игры
+		for(int i=0;i<3;i++)
+			Game[i][j]=0;
+
+	ViktoryLine1=Point(-1,-1);//присваиваем координаты линиям зачеркивания
+	ViktoryLine2=Point(-1,-1);
+	EndOfGame=false;//игра закончена = false
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::N1Click(TObject *Sender)//вызывается при клике на компонент меню
+{
+	NewGame();//создаем новую игру
+	Repaint();//перерисвываем
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::N2Click(TObject *Sender)
+{
+	ShowMessage("Автор: Влад Алистратов БИ1602");
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button3Click(TObject *Sender)
+{
+	ShowMessage("Автор: Влад Алистратов БИ1602");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button2Click(TObject *Sender)
+{
+	isBotON = !isBotON;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+	NewGame();//создаем новую игру
+	Repaint();//перерисвываем
+}
+//---------------------------------------------------------------------------
+

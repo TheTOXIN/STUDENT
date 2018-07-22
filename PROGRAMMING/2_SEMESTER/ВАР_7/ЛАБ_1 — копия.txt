@@ -1,0 +1,62 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "1251");
+
+	const int n = 100, kol = 10;//n - кол.во букв в строке kol - кол.во строк
+	typedef char String[n];//создаем свою переменную которая будет хранить строчки
+	String words[kol];//создаем массив который хронит строчки
+
+	cout << "Input 10 words: " << endl;
+	for (int i = 0; i < 10; i++)//цикл для ввода строк в наш массив слов
+		cin >> words[i];
+
+	cout << "Your words: " << endl;
+	for (int i = 0; i < 10; i++)//цикл для вывода наших слов
+		cout << i + 1 << " - " << words[i] << endl;
+
+	cout << "Your unique word: " << endl;
+
+	bool b;//булиан "метка" который будет равен false если в слове есть одинаковые буквы 
+	int num = 0;//
+	char *max_word;//максимальное слово
+	char *me_word;//
+
+	for (int i = 0; i < 10; i++)//цикл на поиск самого длиного слова из нашего списка
+	{
+		if (i == 0)//если первая итерация цикла записываем текущее слово как максимальное
+			max_word = words[i];
+		if (strlen(words[i]) >= strlen(max_word))//если длинна текущего слова больше максимального
+			max_word = words[i];//то записываем текуще слово в максимальное 
+	}
+
+	for (int i = 0; i < 10; i++)//цикл на поиск слово в котороом все буквы разные
+	{
+		char* word = { words[i] };//записываем текущее слово в words
+		b = true;//ставим булиан в true
+
+		for (int j = 0; j < strlen(word)-1; j++)//два цикла проверки букв
+		{
+			for (int k = j + 1; k < strlen(word); k++)
+			{
+				if (word[j] == word[k])//если проверяемые буквы одинаковые 
+					b = false;//делаем булиан false
+			}
+		}
+		if (b == true && max_word == words[i])//если максимальное слово и проверяемое слово одинаковы то 
+			me_word = words[i];сохроняем это слово в me_word
+	}
+	cout << me_word << endl;
+
+	system("pause");
+	return 0;
+}

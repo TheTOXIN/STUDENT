@@ -1,0 +1,89 @@
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+struct student
+{
+	string FIO;
+	int rating[5];
+	string phone;
+};
+
+const int n = 3;
+student students[n];
+
+void input(student s[], string name)
+{
+	ofstream fout(name, ios::binary);
+	cout << "Введите информацию о студентах:" << name << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cout << i + 1 << ".Фамилия:" << endl;
+		cin >> students[i].FIO;
+		fout.write((char*)students, sizeof(students));
+
+		cout << i + 1 << ".Оценки:" << endl;
+		for (int j = 0; j < 5; j++)
+		{
+			cin >> students[i].rating[j];
+			fout.write((char*)students, sizeof(students));
+		}
+
+		cout << i + 1 << ".Номер телефона:" << endl;
+		cin >> students[i].phone;
+		fout.write((char*)students, sizeof(students));
+	}
+	fout.close();
+}
+
+void print(student m[], string name)
+{
+	ifstream fin(name, ios::binary);
+	cout << "Информация о студентах:" << name << endl;
+	for (int i = 0; i < n; i++)
+	{
+		fin.read((char*)m, sizeof(m));
+		cout << i + 1 << '.' << students[i].FIO;
+		for (int j = 0; j < 5; j++)
+			cout << ' ' << students[i].rating[j];
+		cout << " Phone:"<< students[i].phone << endl;
+	}
+	fin.close();
+}
+
+void call(student s[], string name)
+{
+	ofstream fout(name, ios::binary);
+	cout << "Нужно позвонить: " << endl;
+	for (int i = 0; i < n; i++)
+	{
+		int sred = 0;
+		for (int j = 0; j < 5; j++)
+			sred += students[i].rating[j];
+		if (sred < 20)
+		{
+			cout << i + 1 << '.' << students[i].FIO;
+			cout << " Phone:" << students[i].phone << endl;
+			fout << students[i].phone << endl;453;
+		}
+	}
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	input(students, "students.dat");
+	print(students, "students.dat");
+	call(students, "call.dat");
+
+	system("pause");
+	return 0;
+}

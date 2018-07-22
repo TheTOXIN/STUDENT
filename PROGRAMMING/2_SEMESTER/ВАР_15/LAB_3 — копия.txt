@@ -1,0 +1,115 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale>
+#include <string>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+struct Point//структура описывающая точку c координатами
+{
+	int x;//у каждой точки есть х
+	int y;//и y
+};
+
+const int N = 5;//кол-во точек
+Point points[N];//массив точек
+
+struct Node; 
+//описание типа указателя на элемент очереди 
+typedef Node* PNode; 
+//структура элемента очереди 
+struct Node 
+{ 
+	Point point;  //точка в очереди
+	PNode Next; //указательна след.элемент
+};
+
+void Init(PNode& QB, PNode& QE, Point x)//функция для инициалзации очереди (взято из методички)
+{ 
+	QE = new Node;  
+	QE->point = x;  
+	QE->Next = NULL;  
+	QB = QE; 
+}
+
+void Insert(PNode& QE, Point x) { //функция добавления элемента в очередь (взято из методички)
+	PNode p = new Node;
+	p->point = x;  
+	p->Next = NULL;  
+	QE->Next = p;  
+	QE = p;
+}
+
+void InputQueue(PNode& QB, PNode& QE) //функция перевода массива точек в очередь
+{ 
+	Point Data;
+
+	Data.x = 0;
+	Data.y = 0;
+	Init(QB, QE, Data);//инициализация очереди 
+
+	int i = 0;
+	do //цикл по N
+	{ 
+		Data.x = points[i].x;//присваем x
+		Data.y = points[i].y;//и y из массива
+		if (Data.x < 0)//если x < 0 (тоесть точка находится левее)
+			Insert(QE, Data);//то добавляем её в очередь
+		i++;
+	} while (i < N);
+}
+
+int Empty(PNode QB) //функция проверки очереди на пустоту (взято из методички)
+{ 
+	return (!QB); 
+}
+
+void Remove(PNode& QB, Point& x) //функция удаления (взято из методички)
+{ 
+	if (Empty(QB)) 
+		cout << "Очередь пуста!";  
+	else 
+	{ 
+		PNode p;   
+		x = QB->point;   
+		p = QB;   
+		QB = QB->Next;   
+		delete p; 
+	} 
+}
+
+void PrintQueue(PNode QB) //функция вывода очереди на экран
+{ 
+	Point Data;  
+	cout << "Очередь:\n";  
+	while (!Empty(QB)) 
+	{ 
+		Remove(QB, Data);   
+		cout << "x = " << Data.x << " - " << "y = " << Data.y << endl;
+	}  
+	cout << endl; 
+}
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+
+	cout << "Введите координаты " << N  << " точек" << endl;
+	for (int i = 0; i < N; i++)//заполняем массив точек
+	{
+		cout << i+1 << ".x = ";
+		cin >> points[i].x;
+		cout << i + 1 << ".y = ";
+		cin >> points[i].y;
+	}
+
+	PNode QBegin, QEnd; //создаем очередь 
+	InputQueue(QBegin, QEnd);  //заполняем её нужными точками
+	PrintQueue(QBegin); //выводим на экран
+
+	system("pause");
+	return 0;
+}

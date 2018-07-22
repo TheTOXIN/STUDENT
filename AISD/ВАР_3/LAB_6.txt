@@ -1,0 +1,228 @@
+//#include "stdafx.h" разкоменть если что подйет не так
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <time.h>
+#include <locale.h>
+#include <windows.h>
+
+using namespace std;
+
+double n = -1;//элемент для поиска
+int c = 0;//кол-во элементов
+
+struct element//структура описывающая элемнет дерева
+{
+	double k;//значение элемента
+	element* left;//ссылка на левый элемент
+	element* right;//ссылка на правый элемент
+};
+element *tree = NULL, *P, *Q, *prev;//tree - корень дерева P и Q - вспомогателные указатели prev - для передыдущего элемента
+
+void maketree(double a)//функция которая создает новое дерево
+{
+	//задаем и инициализируем новые элементы
+	tree = new element;
+	tree->k = a;
+	tree->right = tree->left = NULL;
+	P = tree;
+	Q = NULL;
+}
+
+void add(double a)//функция для добавления элемента в дерево
+{
+	if (!tree) {//провреряем есть ли у нас дерево
+		maketree(a);//есои нету создаем
+		return;
+	}
+
+	P = Q = tree;
+
+	while (P != NULL)//пробегаемся и ищем куда поставить новый элемент
+	{
+		Q = P;
+		if (a < P->k)
+			P = P->left;
+		else
+			P = P->right;
+	}
+
+	if (a < Q->k)//в зовисмости от ветки дерева ставим элемент
+	{
+		Q->left = new element;
+		Q->left->k = a;
+		Q->left->left = Q->left->right = NULL;
+
+	}
+	else
+	{
+		Q->right = new element;
+		Q->right->k = a;
+		Q->right->left = Q->right->right = NULL;
+	}
+}
+
+void printTree(element* tree)//функция для вывода дерева через рекурсию
+{
+	if (tree)
+	{
+		printTree(tree->left);
+		cout << tree->k << " - ";
+		printTree(tree->right);
+		if (tree->left == NULL && tree->right == NULL)
+			cout << endl;
+	}
+}
+
+void inputTree()//функция для ввода дерева
+{
+	tree = NULL;
+	cout << "Введите кол-во" << endl;
+	cin >> c;
+	double n;
+	for (int i = 0; i < c; i++)
+	{
+		cout << "ВВЕДИТЕ ЭЛЕМЕНТ №" << i << " :";
+		cin >> n;
+		add(n);
+	}
+	cout << endl;
+	system("pause");
+}
+
+void randomTree()//функция для случайного заполения дерева
+{
+	tree = NULL;
+	cout << "Введите кол-во" << endl;
+	cin >> c;
+	double n;
+	for (int i = 0; i < c; i++)
+	{
+		n = rand() % 100;
+		add(n);
+	}
+	cout << endl;
+	system("pause");
+}
+
+void deleteElement(element* el)//функция для удаления элемента
+{
+	cout << "Удаление элемента - " << el->k << endl;
+
+	if (tree == el)//проверяем является ли элемент корнем
+	{
+		el->k = 0;
+		return;
+	}
+
+	if (el->left == NULL && el->right == NULL)//проверяем является ли эемент листом
+	{
+		cout << "Элемент является листом..." << endl;
+		if (P->left == el)
+			P->left = NULL;
+		else
+			P->right = NULL;
+		return;
+	}
+
+	bool isLeft;//с помощью неё будем определять куда вставлять элемент в левую часть или в правую
+
+	if (el->left != NULL) {//определяем в какой части элемент в левой или правой
+		isLeft = true;
+		Q = el->left;//помещаем левый в вспомогательный указатель
+	}
+	else {
+		isLeft = false;
+		Q = el->right;// или в правый
+	}
+
+	if (P->right == el) //сравниваем корень с искомым элементом
+		P->right = Q;
+	else
+		P->left = Q;
+
+	while (Q->right)//пробегаемся в самую правую часть ветки
+		Q = Q->right;
+
+	Q->right = isLeft ? el->right : el->left;//в зависмости от isLeft помещаем в корень в лево или вправо
+}
+
+void seacrhElement(element* tree, int n, bool isDel)//функция поиска элемента в дереве
+{
+	element* tmp = tree;
+	while (tmp)//пробегаемся по дереву
+	{
+		if (tmp->k == n)//если мы нашли элемент
+		{
+			cout << "Элемент найден - " << tmp->k << endl;
+			if (isDel)//проверяем нужно ли его удалять
+				deleteElement(tmp);
+			return;
+		}
+
+		P = tmp;//обходим через рекурсию другие ветки
+		if (n > tmp->k)
+			tmp = tmp->right;
+		else
+			tmp = tmp->left;
+	}
+
+	if (n == -1)
+		cout << "Элемент не найден..." << endl;
+}
+
+void deleteMoreN(element* tree)//функция для удаления > N
+{
+	cout << "Введите N" << endl;
+	int N;
+	cin >> N;//вводим N
+	for (int i = N; i < 100; i++)//ищем и удаляем через цикл от N до макс элемента в дереве (100)
+	{
+		seacrhElement(tree, i, true);
+	}
+}
+
+void showMenu()//функция вывода меню
+{
+	system("cls");
+	cout << "===Выбирете пункт===" << endl;
+	cout << "1.Создать дерево" << endl;
+	cout << "2.Ввести дерево" << endl;
+	cout << "3.Добавить элемент" << endl;
+	cout << "4.Поиск элемента" << endl;
+	cout << "5.Удаление элемента" << endl;
+	cout << "6.Удаление всех элементов > N" << endl;
+	cout << "7.Вывод элементов дерева" << endl;
+	cout << "8.Выйти" << endl;
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	//логика меню
+	int choose = 0;
+	int n = -1;
+	while (choose != 8)
+	{
+		showMenu();
+		cin >> choose;
+		switch (choose)
+		{
+		case 1: randomTree(); break;
+		case 2: inputTree();  break;
+		case 3: int tmp; cout << "Введите элемент:"; cin >> tmp; add(tmp);  break;
+		case 4: cout << "Введите элемент: " << endl; cin >> n; seacrhElement(tree, n, false); system("pause"); break;
+		case 5: cout << "Введите элемент: " << endl; cin >> n; seacrhElement(tree, n, true); system("pause"); break;
+		case 6: deleteMoreN(tree); break;
+		case 7: printTree(tree); cout << endl;  system("pause"); break;
+		case 8: cout << "ВЫХОД" << endl; break;
+		default: cout << "..." << endl;
+		}
+	}
+
+	system("pause");
+	return 0;
+}

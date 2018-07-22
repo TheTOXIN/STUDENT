@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Comment CommentText="MODEL&#xD;&#xA;">
+    <Position X="0.5" Y="0.5" Height="0.291" Width="0.7" />
+  </Comment>
+  <Class Name="CField">
+    <Position X="0.5" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAQCQERUIAACAAAAEAQBAAAAAAAABAAAA=</HashCode>
+      <FileName>Field.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFigure">
+    <Position X="2.5" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAABABAAAACAABACIAQCCAAAAAIAAAAAADhAmIBgAA=</HashCode>
+      <FileName>Figure.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFactory">
+    <Position X="4.5" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAPAuABAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Factory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGenetic">
+    <Position X="6.75" Y="1" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="CGenetic::DNA">
+        <TypeIdentifier>
+          <NewMemberFileName>Genetic.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AEAABAAAJgwQAQAAAAAgAAAAGAABIAQAAglEEQCBAAA=</HashCode>
+      <FileName>Genetic.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

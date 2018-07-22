@@ -1,0 +1,12 @@
+c:\users\theto\documents\visual studio 2012\Projects\DTP\DTP\bin\Debug\DTP.exe.config
+c:\users\theto\documents\visual studio 2012\Projects\DTP\DTP\obj\Debug\DTP.csprojResolveAssemblyReference.cache
+c:\users\theto\documents\visual studio 2012\Projects\DTP\DTP\bin\Debug\DTP.exe
+c:\users\theto\documents\visual studio 2012\Projects\DTP\DTP\bin\Debug\DTP.pdb
+c:\users\theto\documents\visual studio 2012\Projects\DTP\DTP\obj\Debug\DTP.exe
+c:\users\theto\documents\visual studio 2012\Projects\DTP\DTP\obj\Debug\DTP.pdb
+E:\DEVELOPER\C++\ComputerSystems\DTP\DTP\bin\Debug\DTP.exe.config
+E:\DEVELOPER\C++\ComputerSystems\DTP\DTP\obj\Debug\DTP.exe
+E:\DEVELOPER\C++\ComputerSystems\DTP\DTP\obj\Debug\DTP.pdb
+E:\DEVELOPER\C++\ComputerSystems\DTP\DTP\bin\Debug\DTP.exe
+E:\DEVELOPER\C++\ComputerSystems\DTP\DTP\bin\Debug\DTP.pdb
+E:\DEVELOPER\C++\ComputerSystems\DTP\DTP\obj\Debug\DTP.csprojResolveAssemblyReference.cache

@@ -1,0 +1,120 @@
+#include <iostream>
+using namespace std;
+
+template < class T >
+class complex
+{
+	T real;
+	T imag;
+public:
+	complex(T = 1.0, T = 0.0);
+	void display();
+	T GetReal()
+	{
+		return real;
+	}
+	
+	T GetImag()
+	{
+		return imag;
+	}
+
+	template <class T>
+	friend complex<T>& operator- (complex <T>& c);
+
+	template <class T>
+	friend complex<T>& operator+ (complex <T>&, complex <T>&);
+
+	void izmenenieZnacheniy();
+	T modul();
+};
+
+template <class T>
+complex <T> ::complex(T re, T im)
+{
+	real = re;
+	imag = im;
+}
+
+template <class T>
+void complex <T> ::display()
+{
+	cout << " Real= " << real << endl;
+	cout << " Imag= " << imag << endl;
+}
+
+template <class T>
+complex<T>& operator- (complex<T>& c)
+{
+	c.imag = -c.imag;
+	c.real = -c.real;
+
+	return c;
+}
+
+template <class T>
+complex<T>& operator+ (complex<T>& c1, complex <T>& c2)
+{
+	complex<T> c;
+	c.real = c1.real + c1.real;
+	c.imag = c1.imag = c1.imag;
+
+	return c;
+}
+
+template <class T>
+void complex<T>::izmenenieZnacheniy() 
+{
+	cout << "Input new IMAG : ";
+	cin >> imag;
+	cout << "Input new REAl : ";
+	cin >> real;
+}
+
+template <class T>
+T complex<T>::modul()
+{
+	T n = sqrt(pow(real, 2) + pow(imag, 2));
+	cout << " Modul= " << n << endl;
+	return n;
+}
+
+void main()
+{
+	complex<double> c1(1.5, 2.28);
+	complex<double> c2(4.3, 7.6);
+
+	c1.display();
+	c2.display();
+
+	c1.modul();
+	c2.modul();
+
+	complex<double> c3 = c1 + c2;
+	-c3;
+	
+	c2.izmenenieZnacheniy();
+	c1.izmenenieZnacheniy();
+
+	c1.display();
+	c2.display();
+	c3.display();
+
+	system("pause");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

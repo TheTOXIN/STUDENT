@@ -1,0 +1,90 @@
+#include<iostream>
+#include<string>
+#include<conio.h>
+#include<time.h>
+#include<windows.h>
+
+using namespace std;
+
+class SurfaceArea//абстрактный клаасс площади поверхности
+{
+public:
+	virtual double compute_S() = 0;//функция для подсчета площади поверхности(ПП)
+};
+
+class Parallelepiped : public SurfaceArea //класс параллелепипеда 
+{
+public:
+	int x;//координаты 
+	int y;
+	Parallelepiped(int x, int y);//контсрукторы
+	double compute_S();//вычеселние ПП
+};
+
+Parallelepiped::Parallelepiped(int x, int y)//реализация контсруктура
+{
+	this->x = x;
+	this->y = y;
+}
+
+double Parallelepiped::compute_S()//реализация функции для ПП
+{
+	return 6 * x * y;//возразает результат формулы из задания
+}
+
+class Tetrahedron : public SurfaceArea//аналогично для тетрайдера
+{
+public:
+	int a;
+	Tetrahedron(int a);
+	double compute_S();
+};
+
+Tetrahedron::Tetrahedron(int a)
+{
+	this->a = a;
+}
+
+double Tetrahedron::compute_S()
+{
+	return pow(a, 2) * sqrt(3);
+}
+
+class Sphere : public SurfaceArea//то-же самой со сферой
+{
+public:
+	const double pi = 3.14;
+	int r;
+	Sphere(int r);
+	double compute_S();
+};
+
+Sphere::Sphere(int r)
+{
+	this->r = r;
+}
+
+double Sphere::compute_S()
+{
+	return 4 * pi * pow(r, 2);
+}
+
+int main()
+{
+	setlocale(0, "RUS");
+
+	SurfaceArea *objects[3];//делаем массив указателей для всех обьектов которые наследуют абстарктный класс SurfaceArea
+
+	//создаем наши фигуры и помещаем их в массив
+	objects[0] = new Parallelepiped(3, 4);
+	objects[1] = new Tetrahedron(5);
+	objects[2] = new Sphere(6);
+
+	//выводим ПП каждой фигуры
+	cout << "Parallelepiped S = " << objects[0]->compute_S() << endl;
+	cout << "Tetrahedron S = " << objects[1]->compute_S() << endl;
+	cout << "Sphere S = " << objects[2]->compute_S() << endl;
+
+	system("pause");
+	return 1;
+}

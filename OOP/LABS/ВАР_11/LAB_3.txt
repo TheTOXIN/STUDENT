@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <time.h>
+
+using namespace std;
+
+class Point
+{
+public:
+	int x;
+	int y;
+	int z;
+	Point(int x, int y, int z);
+	friend int operator >>(Point m1, Point m2);
+	friend bool operator ==(Point m1, Point m2);
+	friend Point& operator ++ (Point &m);
+private:
+protected:
+};
+
+Point::Point(int x, int y, int z)
+{
+	this->x = x;
+	this->y = y;
+	this->z = z;
+}
+
+int operator >> (Point m1, Point m2)
+{
+	return sqrt(pow(m2.x - m1.x, 2) + pow(m2.y - m1.y, 2) + pow(m2.z - m1.z, 2));
+}
+
+bool operator==(Point m1, Point m2)
+{
+	return m1.x == m2.x && m1.y == m2.y && m1.z == m2.z;
+}
+
+Point & operator++(Point & m)
+{
+	m.x++;
+	m.y++;
+	m.z++;
+	return m;
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	Point A(1, 1, 1);
+	Point B(2, 2, 2);
+	Point C(3, 3, 3);
+
+	++A;
+	cout << to_string(A == B) << endl;
+	cout << to_string(A >> C) << endl;
+
+	system("pause");
+	return 0;
+}

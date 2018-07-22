@@ -1,0 +1,44 @@
+
+void function_1(int m[], int n)
+{
+	for (int i = 0; i < n; i++)//вводим через цикл элементы массива
+		cin >> m[i];
+	cout << endl;
+}
+
+int function_2(int m[], int n)
+{
+	double x = 0;//x будет хранить длину вектора
+
+	for (int i = 0; i < n; i++)//считаем по формуле длину через цикл увеличивыем наш x
+		x = x + sqrt(pow(m[i], 2));
+
+	return x;//возращаем длину в место вызова
+}
+
+int main()
+{
+	const int n = 5;
+	int m1[n];//первый вектор
+	int m2[n];//второй вектор
+
+	cout << "Input array 1: " << endl;
+	function_1(m1, n);//вызываем функцию для ввода массива
+	cout << "Your array 1: " << endl;
+	for (int i = 0; i < n; i++)//выводим то что мы введи на экран через цикл
+		cout << m1[i] << " ";
+	cout << endl;
+	//делаем тоже самое для второго вектора/массива
+	cout << "Input array 2 : " << endl;
+	function_1(m2, n);
+	cout << "Your array 2: " << endl;
+	for (int i = 0; i < n; i++)
+		cout << m2[i] << " ";
+	cout << endl;
+
+	cout << "Summ length array_1 and array_2: " << endl;
+	cout << fabs(function_2(m1, n) + function_2(m2,n)) << endl;// вызываем и складываем две функции которые считают длину вектора/массива
+								   //передовая в них наши два ветора/массива и их длину n
+	getch();
+	return 0;
+}

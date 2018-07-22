@@ -1,0 +1,143 @@
+//#include "stdafx.h" разкоменть если что подйет не так
+#include<iostream>
+#include<string>
+#include<conio.h>
+#include<time.h>
+#include<windows.h>
+
+using namespace std;
+
+int A[1000];//маасив А
+int len = 0;//кол-во элементов
+
+void showMenu()//функция вывода меню
+{
+	system("cls");
+	cout << "===Выберети пункт===" << endl;
+	cout << "1.Вывести массив" << endl;
+	cout << "2.Ввести массив" << endl;
+	cout << "3.Заполнить случайно" << endl;
+	cout << "4.Сортировать (QUICKSORT)" << endl;
+	cout << "5.Выход" << endl;
+}
+
+void inputSize()//функция ввода кол-ва
+{
+	cout << "Введите кол-во: ";
+	cin >> len;
+}
+
+void outputArray()//функция вывода массива
+{
+	cout << "ВЫВОД МАССИВА - A" << endl;
+	for (int i = 0; i < len; i++)
+	{
+		cout << i << "# = " << A[i] << endl;
+	}
+	cout << endl;
+
+	system("pause");
+}
+
+void inputArray()//функция ввода массива
+{
+	inputSize();
+
+	for (int i = 0; i < len; i++)
+	{
+		cout << i + 1 << "# ";
+		cin >> A[i];
+	}
+}
+
+void randomArray()//функция заполенения массива
+{
+	inputSize();
+
+	for (int i = 0; i < len; i++)
+	{
+		A[i] = rand() % 100;
+	}
+
+	system("pause");
+}
+
+void quickSort(int* m, int j)//функция быстрой сортировки
+{
+	/*
+	Я бы мог закомментировать каждую строчку
+	Но алгоритм сложноватый и тебе будет куда проще если глянешь это
+	https://www.youtube.com/watch?v=MN5k6dxqkg4
+	*/
+
+	int size = j;
+	int k = 0;
+	int p = m[(int)(j / 2)];
+	int tmp = 0;
+
+	do
+	{
+		while (m[k] > p)
+			k++;
+		while (m[j] < p)
+			j--;
+
+		if (k <= j)
+		{
+			tmp = m[k];
+			m[k] = m[j];
+			m[j] = tmp;
+			k++;
+			j--;
+		}
+
+	} while (k <= j);
+
+	if (j > 0)
+		quickSort(m, j);
+	if (size > k)
+		quickSort(m + k, size - k);
+}
+
+void sortArray()//сортировка массива и создание массива B
+{
+	cout << "Сортировка..." << endl;
+
+	quickSort(A, len - 1);//сортиируем массив A
+	cout << "MIN = " << A[len - 1] << endl;
+	cout << "MAX = " << A[0] << endl;
+
+	system("pause");
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	//логика меню
+	int choose = 0;
+	while (choose != 5)
+	{
+		showMenu();
+		cin >> choose;
+		switch (choose)
+		{
+		case 1: outputArray(); break;
+		case 2: inputArray(); break;
+		case 3: randomArray(); break;
+		case 4: sortArray(); break;
+		default: cout << "Ошибка ввода" << endl; break;
+		}
+	}
+
+	system("pause");
+	return 1;
+}
+
+
+
+
+
+

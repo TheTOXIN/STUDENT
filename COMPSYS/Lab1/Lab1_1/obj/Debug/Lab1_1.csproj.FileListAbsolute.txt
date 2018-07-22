@@ -1,0 +1,14 @@
+E:\Files\CS\Lab1_1\Lab1_1\bin\Debug\Lab1_1.exe
+E:\Files\CS\Lab1_1\Lab1_1\bin\Debug\Lab1_1.pdb
+E:\Files\CS\Lab1_1\Lab1_1\obj\Debug\Lab1_1.csprojResolveAssemblyReference.cache
+E:\Files\CS\Lab1_1\Lab1_1\obj\Debug\Lab1_1.MainForm.resources
+E:\Files\CS\Lab1_1\Lab1_1\obj\Debug\Lab1_1.csproj.GenerateResource.Cache
+E:\Files\CS\Lab1_1\Lab1_1\obj\Debug\Lab1_1.exe
+E:\Files\CS\Lab1_1\Lab1_1\obj\Debug\Lab1_1.pdb
+F:\Files\CS\Lab1_1\Lab1_1\bin\Debug\Lab1_1.exe
+F:\Files\CS\Lab1_1\Lab1_1\bin\Debug\Lab1_1.pdb
+F:\Files\CS\Lab1_1\Lab1_1\obj\Debug\Lab1_1.csprojResolveAssemblyReference.cache
+F:\Files\CS\Lab1_1\Lab1_1\obj\Debug\Lab1_1.MainForm.resources
+F:\Files\CS\Lab1_1\Lab1_1\obj\Debug\Lab1_1.csproj.GenerateResource.Cache
+F:\Files\CS\Lab1_1\Lab1_1\obj\Debug\Lab1_1.exe
+F:\Files\CS\Lab1_1\Lab1_1\obj\Debug\Lab1_1.pdb

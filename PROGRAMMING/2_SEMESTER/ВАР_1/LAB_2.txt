@@ -1,0 +1,57 @@
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+struct Students
+{
+	char name[255];
+	int mark[4];
+	double sred;
+};
+
+int main()
+{
+	setlocale(0, "");
+	Students arrayStudet[100];
+	int N;
+	double tmp;
+
+	cout << "Введите количество учеников: ";
+	cin >> N;
+
+	for (int i = 0; i < N; i++)
+	{
+		tmp = 0;
+		cout << "Введите Имя " << i + 1 << "-го ученика: ";
+		cin >> arrayStudet[i].name;
+		cout << "Оценки:\n";
+		for (int j = 0; j < 4; j++)
+		{
+			cout << j + 1 << "-я: ";
+			cin >> arrayStudet[i].mark[j];
+			tmp += arrayStudet[i].mark[j];
+		}
+		tmp = tmp / 4.;
+		arrayStudet[i].sred = tmp;
+		cout << "Средний балл: " << tmp << endl;
+	}
+	
+	double min = 10;
+	Students std;
+	for (int i = 0; i < N; i++)
+	{
+		if (arrayStudet[i].sred < min)
+		{
+			min = arrayStudet[i].sred;
+			std = arrayStudet[i];
+		}
+	}
+
+	cout << "Студент с минимальным средним балом: " << endl;
+	cout << std.name << " - " << std.sred << endl;
+
+	system("pause");
+	return 0;
+}

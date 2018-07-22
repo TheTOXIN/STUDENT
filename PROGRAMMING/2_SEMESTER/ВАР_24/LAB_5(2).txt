@@ -1,0 +1,75 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include "string"
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+const int n = 6;
+double comps[n];
+
+void input(double m[], string name)
+{
+	ofstream fout(name, ios::binary);
+	cout << "Введите компоненты файла " << name << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> m[i];
+		fout.write((char*)m, sizeof(m));
+	}
+	fout.close();
+}
+
+void print(double m[], string name)
+{
+	ifstream fin(name, ios::binary);
+	cout << "Компоненты файла " << name << endl;
+	for (int i = 0; i < n; i++)
+	{
+		fin.read((char*)m, sizeof(m));
+		cout << m[i] << endl;
+	}
+	fin.close();
+}
+
+void check()
+{
+	double sum = 0;
+	for (int i = 0; i < n / 2; i++)
+		sum += comps[i];
+	cout << "Сумма компонентов: " << sum << endl;
+
+	double mult = 1;
+	for (int i = n / 2; i < n; i++)
+		mult *= comps[i];
+	cout << "Произведение компонентов: " << mult << endl;
+
+	double sred = 0;
+	double count = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if ((i + 1) % 3 == 0)
+		{
+			sred += comps[i];
+			count++;
+		}
+	}
+	sred /= count;
+	cout << "Среднее компонентов: " << sred << endl;
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	input(comps, "components.dat");
+	print(comps, "components.dat");
+	check();
+
+	system("pause");
+	return 0;
+}

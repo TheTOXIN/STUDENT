@@ -1,0 +1,196 @@
+//#include "stdafx.h" разкоменть если что подйет не так
+#include<iostream>
+#include<string>
+#include<conio.h>
+#include<time.h>
+#include<windows.h>
+
+using namespace std;
+
+int details[1000];//список деталей
+int zavod1[1000];
+int zavod2[1000];
+int len = 0;//кол-во деталей
+int len1 = 0;
+int len2 = 0;
+
+void showMenu()//функция вывода меню
+{
+	system("cls");
+	cout << "===Выберети пункт===" << endl;
+	cout << "1.Вывести детали" << endl;
+	cout << "2.Ввести детали" << endl;
+	cout << "3.Заполнить случайно" << endl;
+	cout << "4.Сортировать пузырьком" << endl;
+	cout << "5.Сортировать шейкиром" << endl;
+	cout << "6.Выход" << endl;
+}
+
+void inputSize()//функция ввода кол-во деталей
+{
+	cout << "Введите кол-во деталей: ";
+	cin >> len;
+	len1 = 0;
+	len2 = 0;
+}
+
+boolean checkDetail(int n)//фуннкция для проверки детали
+{
+	return n % 2 == 0;
+}
+
+void outputList()//функция вывода билетов
+{
+	cout << "---НОМЕРА ДЕТАЛЕЙ---" << endl;
+
+	cout << "Завод N1 : " << endl;
+	for (int i = 0; i < len1; i++)
+	{
+		cout << "№" << i + 1 << " - " << zavod1[i] << endl;
+	}
+	cout << endl;
+
+	cout << "Завод N2 : " << endl;
+	for (int i = 0; i < len2; i++)
+	{
+		cout << "№" << i + 1 << " - " << zavod2[i] << endl;
+	}
+	cout << endl;
+
+	system("pause");
+}
+
+void inputList()//функция ввода деталей
+{
+	inputSize();
+	cout << "Введите 2-х значные номера деталий: " << endl;
+	for (int i = 0; i < len; i++)
+	{
+		cout << i + 1 << "# ";
+		int in;
+		do
+		{
+			cin >> in;
+		} while (in > 99);//вводим билет пока он не 2-значный
+
+		if (checkDetail(in))
+		{
+			zavod1[len1] = in;
+			len1++;
+		}
+		else
+		{
+			zavod2[len2] = in;
+			len2++;
+		}
+	}
+}
+
+void randomList()//функция для заполенния случайными деталями
+{
+	inputSize();
+
+	for (int i = 0; i < len; i++)
+	{
+		int tmp = rand() % 100;
+		details[i] = tmp;
+
+		if (checkDetail(details[i]))
+		{
+			zavod1[len1] = details[i];
+			len1++;
+		}
+		else
+		{
+			zavod2[len2] = details[i];
+			len2++;
+		}
+	}
+
+	system("pause");
+}
+
+void sortList()//функция для сортировки методом пузырька
+{
+	cout << "Сортировка пузырьком..." << endl;
+	//подробнее тут :)
+	//https://www.youtube.com/watch?v=7vqkHGKbb8k
+	for (int i = 0; i < len1; i++)
+	{
+		for (int j = len1 - 1; j > i; j--)
+		{
+			if (zavod1[j] < zavod1[j - 1])
+			{
+				int tmp = zavod1[j];
+				zavod1[j] = zavod1[j - 1];
+				zavod1[j - 1] = tmp;
+			}
+		}
+	}
+}
+
+void sortShot()
+{
+	cout << "Сортировка шейкером...";
+	int i, j, k, x, L, R;
+	L = 1; R = len - 1; k = len - 1;
+
+	do
+	{
+		for (j = R; j >= L; j--)
+		{
+			if (zavod1[j - 1] > zavod1[j])
+			{
+				x = zavod1[j - 1];
+				zavod1[j - 1] = zavod1[j];
+				zavod1[j] = x;
+				k = j;
+			}
+		}
+
+
+		L = k + 1;
+		for (j = L; j <= R; j++)
+		{
+			if (zavod1[j - 1] > zavod1[j])
+			{
+				x = zavod1[j - 1];
+				zavod1[j - 1] = zavod1[j];
+				zavod1[j] = x; k = j;
+			}
+			R = k - 1;
+		}
+	}while (L < R);
+	system("pause");
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	//логика меню
+	int choose = 0;
+	while (choose != 6)
+	{
+		showMenu();
+		cin >> choose;
+		switch (choose)
+		{
+		case 1: outputList(); break;
+		case 2: inputList(); break;
+		case 3: randomList(); break;
+		case 4: sortList(); break;
+		case 5: sortShot(); break;
+		default: cout << "Ошибка ввода" << endl; break;
+		}
+	}
+
+	system("pause");
+	return 1;
+}
+
+
+

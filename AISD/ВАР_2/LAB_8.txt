@@ -1,0 +1,126 @@
+#include<iostream>
+#include<string>
+#include<conio.h>
+#include<time.h>
+#include<windows.h>
+
+using namespace std;
+
+string list[1000];
+int len = 0;
+
+void showMenu()
+{
+	system("cls");
+	cout << "===Выберети пункт===" << endl;
+	cout << "1.Вывестиn номера" << endl;
+	cout << "2.Ввести номера" << endl;
+	cout << "3.Заполнить случайно" << endl;
+	cout << "4.Сортировать" << endl;
+	cout << "5.Показать номера - '4***'" << endl;
+	cout << "6.Выход" << endl;
+}
+
+void inputSize()
+{
+	cout << "Введите кол-во номеров: ";
+	cin >> len;
+}
+
+void outputList(bool isOnlyStartFour)
+{
+	cout << "---НОМЕРА---" << endl;
+	
+	for (int i = 0; i < len; i++)
+	{
+		if (isOnlyStartFour && list[i][0] != '4')
+			continue;
+		cout << i + 1 << "# = " << list[i] << endl;
+	}
+	cout << endl;
+
+	system("pause");
+}
+
+void inputList()
+{
+	inputSize();
+	cout << "Введите 3-х значныt номера: " << endl;
+	for (int i = 0; i < len; i++)
+	{
+		cout << i + 1 << "# ";
+		string in;
+		do
+		{
+			cin >> in;
+		} while (in.length() != 3);
+	}
+}
+
+void randomList()
+{
+	inputSize();
+
+	for (int i = 0; i < len; i++)
+	{
+		int tmp = rand() % 900 + 99;
+		list[i] = to_string(tmp);
+	}
+
+	system("pause");
+}
+
+void sortList()
+{
+	cout << "Сортировка..." << endl;
+
+	for (int i = 0; i < len; i++)
+	{
+		for (int j = len - 1; j > i; j--)
+		{
+			if (list[j] < list[j - 1])
+			{
+				string tmp = list[j]; 
+				list[j] = list[j - 1]; 
+				list[j - 1] = tmp; 
+			}
+		}
+	}
+
+	system("pause");
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	int def[15] = { 456, 124, 786, 435, 788, 444, 565, 127, 458, 322, 411, 531, 400, 546, 410 };
+	len = 15;
+
+	for (int i = 0; i < 15; i++)
+	{
+		list[i] = to_string(def[i]);
+	}
+
+	int choose = 0;
+	while (choose != 6)
+	{
+		showMenu();
+		cin >> choose;
+		switch (choose)
+		{
+		case 1: outputList(false); break;
+		case 2: inputList(); break;
+		case 3: randomList(); break;
+		case 4: sortList(); break;
+		case 5: outputList(true);
+		default: cout << "Ошибка ввода" << endl; break;
+		}
+	}
+
+	system("pause");
+	return 1;
+}

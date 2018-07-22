@@ -1,0 +1,112 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+void function(int n1, int n2)
+{
+	int n, sum, max = 0;
+
+	for (int i = n1; i <= n2; i++)
+	{
+		sum = 0;
+		for (int j = 1; j <= i; j++)
+		{
+			if (i%j == 0)
+				sum = sum + j;
+		}
+		if (sum >= max)
+		{
+			max = sum;
+			n = i;
+		}
+	}
+	cout << n << endl;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+
+	int n1, n2;
+
+	cout << "Введите интервал: " << endl;
+	cin >> n1;
+	cin >> n2;
+
+	cout << "Число из интервала с максимальной суммой делителей: " << endl;
+	function(n1, n2);
+
+	system("pause");
+	return 0;
+}
+**********************************************************
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+void function1(int m[10])
+{
+	for (int i = 0; i < 10; i++)
+	{
+		cin >> m[i];
+	}
+}
+
+void function2(int m[10])
+{
+	for (int i = 0; i < 10; i++)
+	{
+		cout << m[i] << " ";
+	}
+	cout << endl;
+}
+
+void function3(int m[10])
+{
+	int result;
+	cout << "Cумма не четных элементов:" << endl;
+	result = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		if (i % 2 != 0)
+			result = result + m[i];
+	}
+	cout << result << endl;
+
+	cout << "Cумма четных элементов:" << endl;
+	result = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		if (i % 2 == 0)
+			result = result + m[i];
+	}
+	cout << result << endl;
+
+	cout << "Разность не четных элементов:" << endl;
+	result = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		if (i % 2 != 0)
+			result = result - m[i];
+	}
+	cout << result << endl;
+
+	cout << "Разность четных элементов:" << endl;
+	result = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		if (i % 2 == 0)
+			result = result - m[i];
+	}
+	cout << result << endl;
+}

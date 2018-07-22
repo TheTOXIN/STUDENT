@@ -1,0 +1,93 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'LAB_6 VAR_2'
+  ClientHeight = 196
+  ClientWidth = 644
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 209
+    Top = 8
+    Width = 155
+    Height = 16
+    Caption = #1042#1074#1077#1076#1080#1090#1077' '#1087#1086#1088#1103#1076#1086#1082' '#1084#1072#1090#1088#1080#1094#1099
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Edit1: TEdit
+    Left = 383
+    Top = 8
+    Width = 42
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    Text = 'N'
+  end
+  object Button1: TButton
+    Left = 286
+    Top = 112
+    Width = 91
+    Height = 25
+    Caption = #1042#1099#1095#1077#1089#1083#1080#1090#1100
+    TabOrder = 1
+    OnClick = Button1Click
+  end
+  object StringGrid1: TStringGrid
+    Left = 383
+    Top = 38
+    Width = 250
+    Height = 146
+    ColCount = 2
+    RowCount = 2
+    TabOrder = 2
+    ColWidths = (
+      64
+      64)
+    RowHeights = (
+      24
+      24)
+  end
+  object StringGrid2: TStringGrid
+    Left = 8
+    Top = 39
+    Width = 272
+    Height = 146
+    ColCount = 2
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing]
+    TabOrder = 3
+    ColWidths = (
+      64
+      64)
+    RowHeights = (
+      24
+      24)
+  end
+  object Button2: TButton
+    Left = 286
+    Top = 72
+    Width = 91
+    Height = 25
+    Caption = #1055#1086#1089#1090#1088#1086#1080#1090#1100
+    TabOrder = 4
+    OnClick = Button2Click
+  end
+end

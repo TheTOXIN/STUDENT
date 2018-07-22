@@ -1,0 +1,225 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <time.h>
+#include <locale.h>
+#include <windows.h>
+
+using namespace std;
+
+double n = -1;
+int c = 0;
+
+struct element
+{
+	double k;
+	element* left;
+	element* right;
+};
+element *tree = NULL, *P, *Q, *prev;
+
+void maketree(double a)
+{
+	tree = new element;
+	tree->k = a;
+	tree->right = tree->left = NULL;
+	P = tree;
+	Q = NULL;
+}
+
+void add(double a)
+{
+	if (!tree) {
+		maketree(a);
+		return;
+	}
+
+	P = Q = tree;
+
+	while (P != NULL)
+	{
+		Q = P;
+		if (a < P->k)
+			P = P->left;
+		else
+			P = P->right;
+	}
+
+	if (a < Q->k)
+	{
+		Q->left = new element;
+		Q->left->k = a;
+		Q->left->left = Q->left->right = NULL;
+
+	}
+	else
+	{
+		Q->right = new element;
+		Q->right->k = a;
+		Q->right->left = Q->right->right = NULL;
+	}
+}
+
+void printTree(element* tree)
+{
+	if (tree)
+	{
+		printTree(tree->left);
+		cout << tree->k << " - ";
+		printTree(tree->right);
+		if (tree->left == NULL && tree->right == NULL)
+			cout << endl;
+	}
+}
+
+void inputTree()
+{
+	tree = NULL;
+	cout << "Введите кол-во" << endl;
+	cin >> c;
+	double n;
+	for (int i = 0; i < c; i++)
+	{
+		cout << "ВВЕДИТЕ ЭЛЕМЕНТ №" << i << " :";
+		cin >> n;
+		add(n);
+	}
+	cout << endl;
+	system("pause");
+}
+
+void randomTree()
+{
+	tree = NULL;
+	cout << "Введите кол-во" << endl;
+	cin >> c;
+	double n;
+	for (int i = 0; i < c; i++)
+	{
+		n = rand() % 100;
+		add(n);
+	}
+	cout << endl;
+	system("pause");
+}
+
+void deleteElement(element* el)
+{
+	cout << "Удаление элемента - " << el->k << endl;
+
+	if (tree == el)
+	{
+		el->k = 0;
+		return;
+	}
+
+	if (el->left == NULL && el->right == NULL)
+	{
+		cout << "Элемент является листом..." << endl;
+		if (P->left == el)
+			P->left = NULL;
+		else
+			P->right = NULL;
+		return;
+	}
+
+	bool isLeft;
+
+	if (el->left != NULL) {
+		isLeft = true;
+		Q = el->left;
+	}
+	else {
+		isLeft = false;
+		Q = el->right;
+	}
+
+	if (P->right == el)
+		P->right = Q;
+	else
+		P->left = Q;
+
+	while (Q->right)
+		Q = Q->right;
+
+	Q->right = isLeft ? el->right : el->left;
+}
+
+void seacrhElement(element* tree, int n, bool isDel)
+{
+	element* tmp = tree;
+	while (tmp)
+	{
+		if (tmp->k == n)
+		{
+			cout << "Элемент найден - " << tmp->k << endl;
+			if (isDel)
+				deleteElement(tmp);
+			return;
+		}
+
+		P = tmp;
+		if (n > tmp->k)
+			tmp = tmp->right;
+		else
+			tmp = tmp->left;
+	}
+
+	if (n == -1)
+		cout << "Элемент не найден..." << endl;
+}
+
+void deleteOdd(element* tree)
+{
+	for (int number = 0; number < 100; number++)
+	{
+		if ((number != 2 && number != 3 && number != 0) // введённое число не 2 и не 3 и не 0
+			&& (number % 2 == 0 || number % 3 == 0)) // нет остатка от деления на 2 или на 3
+				seacrhElement(tree, number, true);
+	}
+}
+
+void showMenu()
+{
+	system("cls");
+	cout << "===Выбирете пункт===" << endl;
+	cout << "1.Создать дерево" << endl;
+	cout << "2.Ввести дерево" << endl;
+	cout << "3.Добавить элемент" << endl;
+	cout << "4.Поиск элемента" << endl;
+	cout << "5.Удаление элемента" << endl;
+	cout << "6.Удаление всех нечетных элементов." << endl;
+	cout << "7.Вывод элементов дерева" << endl;
+	cout << "8.Выйти" << endl;
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	int choose = 0;
+	int n = -1;
+	while (choose != 8)
+	{
+		showMenu();
+		cin >> choose;
+		switch (choose)
+		{
+		case 1: randomTree(); break;
+		case 2: inputTree();  break;
+		case 3: int tmp; cout << "Введите элемент:"; cin >> tmp; add(tmp);  break;
+		case 4: cout << "Введите элемент: " << endl; cin >> n; seacrhElement(tree, n, false); system("pause"); break;
+		case 5: cout << "Введите элемент: " << endl; cin >> n; seacrhElement(tree, n, true); system("pause"); break;
+		case 6: deleteOdd(tree); break;
+		case 7: printTree(tree); cout << endl;  system("pause"); break;
+		case 8: cout << "ВЫХОД" << endl; break;
+		default: cout << "..." << endl;
+		}
+	}
+
+	system("pause");
+	return 0;
+}

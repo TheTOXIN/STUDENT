@@ -1,0 +1,137 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <time.h>
+
+using namespace std;
+
+template <class T>
+class Ellips {
+private:
+	T x;
+	T y;
+	T r1;
+	T r2;
+public:
+	const double pi = 3.14;
+	Ellips(T x, T y, T r1, T r2);
+	void draw();
+	void clear();
+	void move();
+	void add();
+	T getR1();
+	T getR2();
+	T getX();
+	T getY();
+
+	friend bool operator !=(Sircle s1, Sircle s2) {
+		return s1.getR1() != s2.getR1() && s1.getR2() != s2.getR2();
+	}
+
+	friend Sircle& operator ++(Sircle &s, int n) {
+		s.add();
+		return s;
+	}
+protected:
+};
+
+template<class T>
+Ellips<T>::Ellips(T x, T y, T r1, T r2)
+{
+	this->x = x;
+	this->y = y;
+	this->r1 = r1;
+	this->r2 = r2;
+}
+
+template<class T>
+void Ellips<T>::add()
+{
+	this->x++;
+	this->y++;
+}
+
+template<class T>
+void Ellips<T>::draw()
+{
+	cout << "DRAW.." << endl;
+	cout << "x = " << this->x << " y = " << this->y << endl;
+	cout << "r1 = " << this->r1 << " r2 = " << this->r2 << endl;
+	cout << endl;
+}
+
+template<class T>
+void Ellips<T>::clear()
+{
+	cout << "CLEAR..." << endl;
+	this->r1 = 0;
+	this->r2 = 0;
+	cout << endl;
+}
+
+template<class T>
+void Ellips<T>::move()
+{
+	cout << "MOVE.." << endl;
+	cout << "Input x = ";
+	cin >> this->x;
+	cout << "Input y = ";
+	cin >> this->y;
+	cout << endl;
+}
+
+template<class T>
+T Ellips<T>::getR1()
+{
+	return this->r1;
+}
+
+template<class T>
+T Ellips<T>::getR2()
+{
+	return this->r2;
+}
+
+template<class T>
+T Ellips<T>::getX()
+{
+	return this->x;
+}
+
+template<class T>
+T Ellips<T>::getY()
+{
+	return this->y;
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	Ellips<int> s1(1, 2, 3, 3);
+	Ellips<int> s2(1, 2, 3, 3);
+
+	s1.draw();
+	s2.draw();
+
+	s2.clear();
+	
+	if (s1 != s2)
+		cout << "s1 != s2" << endl << endl;
+	else
+		cout << "s1 == s2" << endl << endl;
+
+	s1++;
+	s2.move();
+
+	s1.draw();
+	s2.draw();
+
+	system("pause");
+	return 0;
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="FileDownloader">
+</Property><Property Name="Solution File" Value="F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\FileDownloader.sln">
+</Property><Property Name="User Options File" Value="F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\FileDownloader.suo">
+</Property><Property Name="Date" Value="31 октября 2008 г.">
+</Property><Property Name="Time" Value="13:01">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="FileDownloader.sln" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\FileDownloader.sln">
+</Event><Event ErrorLevel="0" Project="" Source="FileDownloader.suo" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\FileDownloader.suo">
+</Event><Event ErrorLevel="0" Project="FileDownloader" Source="FileDownloader.csproj" Description="Project file successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\FileDownloader.csproj">
+</Event><Event ErrorLevel="0" Project="FileDownloader" Source="FileDownloader.csproj.user" Description="Project user file successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\FileDownloader.csproj.user">
+</Event><Event ErrorLevel="0" Project="FileDownloader" Source="AssemblyInfo.cs" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="FileDownloader" Source="FileDownloader.cs" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\FileDownloader.cs">
+</Event><Event ErrorLevel="0" Project="FileDownloader" Source="FileDownloaderForm.cs" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\FileDownloaderForm.cs">
+</Event><Event ErrorLevel="0" Project="FileDownloader" Source="App.ico" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\App.ico">
+</Event><Event ErrorLevel="0" Project="FileDownloader" Source="FileDownloaderForm.resx" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\FileDownloaderForm.resx">
+</Event><Event ErrorLevel="0" Project="FileDownloader" Source="FileDownloader.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="FileDownloader" Source="FileDownloader.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="FileDownloaderTester" Source="..\FileDownloaderTester\FileDownloaderTester.csproj" Description="Project file successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\FileDownloaderTester.csproj">
+</Event><Event ErrorLevel="0" Project="FileDownloaderTester" Source="..\FileDownloaderTester\FileDownloaderTester.csproj.user" Description="Project user file successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\FileDownloaderTester.csproj.user">
+</Event><Event ErrorLevel="0" Project="FileDownloaderTester" Source="..\FileDownloaderTester\AssemblyInfo.cs" Description="Backup file name conflict.  Renaming file to:  F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\AssemblyInfo(2).cs">
+</Event><Event ErrorLevel="0" Project="FileDownloaderTester" Source="..\FileDownloaderTester\AssemblyInfo.cs" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\AssemblyInfo(2).cs">
+</Event><Event ErrorLevel="0" Project="FileDownloaderTester" Source="..\FileDownloaderTester\ExceptionManager.cs" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\ExceptionManager.cs">
+</Event><Event ErrorLevel="0" Project="FileDownloaderTester" Source="..\FileDownloaderTester\Main.cs" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\Main.cs">
+</Event><Event ErrorLevel="0" Project="FileDownloaderTester" Source="..\FileDownloaderTester\App.ico" Description="Backup file name conflict.  Renaming file to:  F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\App(2).ico">
+</Event><Event ErrorLevel="0" Project="FileDownloaderTester" Source="..\FileDownloaderTester\App.ico" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\App(2).ico">
+</Event><Event ErrorLevel="0" Project="FileDownloaderTester" Source="..\FileDownloaderTester\Main.resx" Description="File successfully backed up as F:\Documents and Settings\Driver.DRIVER-175CB4B9\Рабочий стол\desktop1\lab5\c#\FileDownloader\Backup\Main.resx">
+</Event><Event ErrorLevel="0" Project="FileDownloaderTester" Source="..\FileDownloaderTester\FileDownloaderTester.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="FileDownloaderTester" Source="..\FileDownloaderTester\FileDownloaderTester.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="" Source="FileDownloader.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="FileDownloader.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="FileDownloader" Source="FileDownloader.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

@@ -1,0 +1,81 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <time.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+int** maker(int m, int n)
+{
+	int** t = new int*[m];
+	for (int i = 0; i < m; i++)
+	{
+		t[i] = new int[n];
+		for (int j = 0; j < n; j++)
+		{
+			t[i][j] = rand() % 3;
+		}
+	}
+	return t;
+}
+
+void printer(int m, int n, int **matr)
+{
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cout.width(4);
+			cout << matr[i][j];
+		}
+		cout << endl;
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	srand(time(NULL));
+
+	int m, n;
+	cout << "Введите размер матриц M x N < 11: " << endl;
+	cin >> m >> n;
+
+	cout << "Матрица A :" << endl;
+	int **A = maker(m, n);
+	printer(m, n, A);
+	
+	int* B = new int[m];
+	
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n/2; j++)
+		{
+			if (A[i][j] == A[i][n - 1 - j])
+				B[i] = 1;
+			else
+				B[i] = 0;
+		}
+	}
+
+	cout << "Вектор В:" << endl;
+	for (int i = 0; i < m; i++)
+	{
+		cout << B[i] << " ";
+	}
+	cout << endl;
+
+	for (int i = 0; i < m/2; i++)
+		delete[] A[i];
+
+	delete[] A;
+	delete[] B;
+
+	system("pause");
+	return 0;
+}

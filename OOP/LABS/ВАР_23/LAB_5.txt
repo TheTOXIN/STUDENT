@@ -1,0 +1,449 @@
+#include <iostream>
+#include <math.h>
+#include <time.h>
+using namespace std;
+//класс исключения "деление на ноль"
+class ZeroDivideException
+{
+public:
+	int idx;
+	ZeroDivideException(int i)
+	{
+		idx = i;
+	}
+};
+//класс исключения "корень из отрицательного числа"
+class SqrtException
+{
+public:
+	int idx;
+	SqrtException(int i)
+	{
+		idx = i;
+	}
+};
+//класс исключения "выход за пределы индексов массива"
+class IndexException
+{
+public:
+	int idx;
+	IndexException(int i)
+	{
+		idx = i;
+	}
+};
+//функция установки очередного значения массива
+void SetValueA(double val, int i, int n, double* ar)
+{
+	if (val == 0.0) //пытаемся делить на ноль
+	{
+		ar[i] = 0.0;
+		throw ZeroDivideException(i);
+	}
+	if (val<0) //пытаемся извлечь корень из отриц. числа
+	{
+		ar[i] = 0.0;
+		throw SqrtException(i);
+	}
+	if (i >= n) //недопустимый индекс массива
+		throw IndexException(i);
+	ar[i] = sqrt(1 / val); //нормальная ситуация
+}
+
+//функция установки очередного значения массива
+void SetValueB(int i, int n, double* ar)
+{
+	double val = rand() % 100;
+	if (val == 0.0) //пытаемся делить на ноль
+	{
+		ar[i] = 0.0;
+		throw ZeroDivideException(i);
+	}
+	if (val<0) //пытаемся извлечь корень из отриц. числа
+	{
+		ar[i] = 0.0;
+		throw SqrtException(i);
+	}
+	if (i >= n) //недопустимый индекс массива
+		throw IndexException(i);
+	ar[i] = val; //нормальная ситуация
+}
+
+//функция установки очередного значения массива
+void SetValueC(int i, int n, double* ar, double* a, double* b)
+{
+	double val = sqrt(a[i - 1] + b[i] - 1);
+	if (val == 0.0) //пытаемся делить на ноль
+	{
+		ar[i] = 0.0;
+		throw ZeroDivideException(i);
+	}
+	if (val<0) //пытаемся извлечь корень из отриц. числа
+	{
+		ar[i] = 0.0;
+		throw SqrtException(i);
+	}
+	if (i >= n) //недопустимый индекс массива
+		throw IndexException(i);
+	ar[i] = val; //нормальная ситуация
+}
+//функция печати массива
+void Print(int i, int n, double* ar)
+{
+	if (i >= n) //недопустимый индекс массива
+		throw IndexException(i);
+	cout << ar[i] << ' ';
+}
+
+void fill_A(double* a, int n)
+{
+	double x = 0;
+	for (int i = 0; x <= 6.0; i++, x += 0.4)
+	{
+		try
+		{
+			SetValueA(x, i, n, a); //пытаемся сформировать массив
+		}
+		catch (ZeroDivideException ex) //перехват исключений
+		{
+			cout << "Zero divide error in index " << ex.idx << endl;
+		}
+		catch (SqrtException ex)
+		{
+			cout << "Sqrt error in index " << ex.idx << endl;
+		}
+		catch (IndexException ex)
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	for (int i = 0; i < n; i++) //генерация некорректного доступа
+	{
+		try
+		{
+			Print(i, n, a); //пытаемся распечатать массив
+		}
+		catch (IndexException ex) //перехват исключений
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	cout << endl;
+}
+
+void fill_B(double *a, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		try
+		{
+			SetValueB(i, n, a); //пытаемся сформировать массив
+		}
+		catch (ZeroDivideException ex) //перехват исключений
+		{
+			cout << "Zero divide error in index " << ex.idx << endl;
+		}
+		catch (SqrtException ex)
+		{
+			cout << "Sqrt error in index " << ex.idx << endl;
+		}
+		catch (IndexException ex)
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	for (int i = 0; i < n; i++) //генерация некорректного доступа
+	{
+		try
+		{
+			Print(i, n, a); //пытаемся распечатать массив
+		}
+		catch (IndexException ex) //перехват исключений
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	cout << endl;
+}
+
+void fill_C(double *c, double *a, double *b, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		try
+		{
+			SetValueC(i, n, c, a, b); //пытаемся сформировать массив
+		}
+		catch (ZeroDivideException ex) //перехват исключений
+		{
+			cout << "Zero divide error in index " << ex.idx << endl;
+		}
+		catch (SqrtException ex)
+		{
+			cout << "Sqrt error in index " << ex.idx << endl;
+		}
+		catch (IndexException ex)
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	for (int i = 0; i < n; i++) //генерация некорректного доступа
+	{
+		try
+		{
+			Print(i, n, a); //пытаемся распечатать массив
+		}
+		catch (IndexException ex) //перехват исключений
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	cout << endl;
+}
+
+void main()
+{
+	setlocale(0, "RUS");
+	srand(time(NULL));
+
+	int n1 = 10;
+	int n2 = 8;
+	int n3 = 12;
+
+	double* a = new double[n1];
+	double* b = new double[n2];
+	double* c = new double[n3];
+	
+	cout << "Массив А" << endl;
+	fill_A(a, n1);
+	cout << "Массив B" << endl;
+	fill_B(b, n2);
+	cout << "Массив C" << endl;
+	fill_C(c, a, b, n3);
+
+	system("pause");
+}#include <iostream>
+#include <math.h>
+#include <time.h>
+using namespace std;
+//класс исключения "деление на ноль"
+class ZeroDivideException
+{
+public:
+	int idx;
+	ZeroDivideException(int i)
+	{
+		idx = i;
+	}
+};
+//класс исключения "корень из отрицательного числа"
+class SqrtException
+{
+public:
+	int idx;
+	SqrtException(int i)
+	{
+		idx = i;
+	}
+};
+//класс исключения "выход за пределы индексов массива"
+class IndexException
+{
+public:
+	int idx;
+	IndexException(int i)
+	{
+		idx = i;
+	}
+};
+//функция установки очередного значения массива
+void SetValueA(double val, int i, int n, double* ar)
+{
+	if (val == 0.0) //пытаемся делить на ноль
+	{
+		ar[i] = 0.0;
+		throw ZeroDivideException(i);
+	}
+	if (val<0) //пытаемся извлечь корень из отриц. числа
+	{
+		ar[i] = 0.0;
+		throw SqrtException(i);
+	}
+	if (i >= n) //недопустимый индекс массива
+		throw IndexException(i);
+	ar[i] = sqrt(1 / val); //нормальная ситуация
+}
+
+//функция установки очередного значения массива
+void SetValueB(int i, int n, double* ar)
+{
+	double val = rand() % 100;
+	if (val == 0.0) //пытаемся делить на ноль
+	{
+		ar[i] = 0.0;
+		throw ZeroDivideException(i);
+	}
+	if (val<0) //пытаемся извлечь корень из отриц. числа
+	{
+		ar[i] = 0.0;
+		throw SqrtException(i);
+	}
+	if (i >= n) //недопустимый индекс массива
+		throw IndexException(i);
+	ar[i] = val; //нормальная ситуация
+}
+
+//функция установки очередного значения массива
+void SetValueC(int i, int n, double* ar, double* a, double* b)
+{
+	double val = sqrt(a[i - 1] + b[i] - 1);
+	if (val == 0.0) //пытаемся делить на ноль
+	{
+		ar[i] = 0.0;
+		throw ZeroDivideException(i);
+	}
+	if (val<0) //пытаемся извлечь корень из отриц. числа
+	{
+		ar[i] = 0.0;
+		throw SqrtException(i);
+	}
+	if (i >= n) //недопустимый индекс массива
+		throw IndexException(i);
+	ar[i] = val; //нормальная ситуация
+}
+//функция печати массива
+void Print(int i, int n, double* ar)
+{
+	if (i >= n) //недопустимый индекс массива
+		throw IndexException(i);
+	cout << ar[i] << ' ';
+}
+
+void fill_A(double* a, int n)
+{
+	double x = 0;
+	for (int i = 0; x <= 6.0; i++, x += 0.4)
+	{
+		try
+		{
+			SetValueA(x, i, n, a); //пытаемся сформировать массив
+		}
+		catch (ZeroDivideException ex) //перехват исключений
+		{
+			cout << "Zero divide error in index " << ex.idx << endl;
+		}
+		catch (SqrtException ex)
+		{
+			cout << "Sqrt error in index " << ex.idx << endl;
+		}
+		catch (IndexException ex)
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	for (int i = 0; i < n; i++) //генерация некорректного доступа
+	{
+		try
+		{
+			Print(i, n, a); //пытаемся распечатать массив
+		}
+		catch (IndexException ex) //перехват исключений
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	cout << endl;
+}
+
+void fill_B(double *a, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		try
+		{
+			SetValueB(i, n, a); //пытаемся сформировать массив
+		}
+		catch (ZeroDivideException ex) //перехват исключений
+		{
+			cout << "Zero divide error in index " << ex.idx << endl;
+		}
+		catch (SqrtException ex)
+		{
+			cout << "Sqrt error in index " << ex.idx << endl;
+		}
+		catch (IndexException ex)
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	for (int i = 0; i < n; i++) //генерация некорректного доступа
+	{
+		try
+		{
+			Print(i, n, a); //пытаемся распечатать массив
+		}
+		catch (IndexException ex) //перехват исключений
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	cout << endl;
+}
+
+void fill_C(double *c, double *a, double *b, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		try
+		{
+			SetValueC(i, n, c, a, b); //пытаемся сформировать массив
+		}
+		catch (ZeroDivideException ex) //перехват исключений
+		{
+			cout << "Zero divide error in index " << ex.idx << endl;
+		}
+		catch (SqrtException ex)
+		{
+			cout << "Sqrt error in index " << ex.idx << endl;
+		}
+		catch (IndexException ex)
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	for (int i = 0; i < n; i++) //генерация некорректного доступа
+	{
+		try
+		{
+			Print(i, n, a); //пытаемся распечатать массив
+		}
+		catch (IndexException ex) //перехват исключений
+		{
+			cout << "Index out of range in index " << ex.idx << endl;
+		}
+	}
+	cout << endl;
+}
+
+void main()
+{
+	setlocale(0, "RUS");
+	srand(time(NULL));
+
+	int n1 = 10;
+	int n2 = 8;
+	int n3 = 12;
+
+	double* a = new double[n1];
+	double* b = new double[n2];
+	double* c = new double[n3];
+	
+	cout << "Массив А" << endl;
+	fill_A(a, n1);
+	cout << "Массив B" << endl;
+	fill_B(b, n2);
+	cout << "Массив C" << endl;
+	fill_C(c, a, b, n3);
+
+	system("pause");
+}

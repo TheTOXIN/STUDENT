@@ -1,0 +1,31 @@
+﻿Построение начато 11.12.2017 1:14:32.
+     1>Проект "E:\DEVELOPER\C++\ПРОГИ\МАЯТНИК\Pendulum\Pendulum\Pendulum.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\SFML-2.4.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_DYNAMIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Pendulum.cpp
+         Pendulum.cpp
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(9): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(11): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(11): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(12): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(13): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(13): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(14): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(16): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(24): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(27): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(33): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(35): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\developer\c++\проги\маятник\pendulum\pendulum\pendulum.cpp(38): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\DEVELOPER\C++\ПРОГИ\МАЯТНИК\Pendulum\Debug\Pendulum.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML-2.4.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\DEVELOPER\C++\ПРОГИ\МАЯТНИК\Pendulum\Debug\Pendulum.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\DEVELOPER\C++\ПРОГИ\МАЯТНИК\Pendulum\Debug\Pendulum.lib" /MACHINE:X86 Debug\Gearbox.obj
+         Debug\Label.obj
+         Debug\main.obj
+         Debug\Menu.obj
+         Debug\Pendulum.obj
+         Debug\Settings.obj
+         Pendulum.vcxproj -> E:\DEVELOPER\C++\ПРОГИ\МАЯТНИК\Pendulum\Debug\Pendulum.exe
+     1>Построение проекта "E:\DEVELOPER\C++\ПРОГИ\МАЯТНИК\Pendulum\Pendulum\Pendulum.vcxproj" завершено (целевые объекты Build).
+
+Построение успешно завершено.
+
+Затраченное время: 00:00:04.46

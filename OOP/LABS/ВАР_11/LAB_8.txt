@@ -1,0 +1,118 @@
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <time.h>
+#include <string>
+#include <conio.h>
+#include <stack>
+#include <list>
+#include <set>
+#include <iterator>
+#include <windows.h>
+
+using namespace std;
+
+class Address
+{
+public:
+	string city;
+	string street;
+	int number;
+	void toString();
+};
+
+void Address::toString()
+{
+	cout << "City = " << this->city << " ";
+	cout << "Number = "<< this->number << " ";
+	cout << "Street = " << this->street << " ";
+}
+
+class Student
+{
+public:
+	string FIO;
+	Address address;
+	double s;
+
+	Student();
+	Student(string FIO);
+	void toString();
+};
+
+bool operator <(const Student s1, const Student s2)
+{
+	if (s1.s > s2.s)
+		return true;
+	return false;
+}
+
+
+Student::Student()
+{
+
+}
+
+Student::Student(string FIO)
+{
+	this->FIO = FIO;
+	this->s = rand() % 100;
+	this->address.city = "City_" + to_string(rand() % 100);
+	this->address.street = "Street_" + to_string(rand() % 100);
+	this->address.number = rand() % 100;
+}
+
+void Student::toString()
+{
+	cout << "FIO = " << this->FIO << " ";
+	cout << "S = " << this->s << endl;
+	this->address.toString();
+	cout << endl;
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	
+	list<Student> studs;
+	set<Student> zasel;
+
+	int N;
+	cout << "Введите кол-во студентов :";
+	cin >> N;
+
+	for (int i = 0; i < N; i++)
+	{
+		string FIO;
+		cout << i + 1 << " ФИО Студента = ";
+		cin >> FIO;
+		Student stud(FIO);
+		studs.push_back(stud);
+	}
+	cout << endl;
+
+	cout << "Список студентов: " << endl;
+	list<Student>::iterator p = studs.begin();
+	while (p != studs.end())
+	{
+		zasel.insert(*p);
+		(*p).toString();
+		p++;
+	}
+	cout << endl;
+
+
+	cout << "Студенты по заселению: " << endl;
+	set<Student>::iterator it;
+	for (it = zasel.begin(); it != zasel.end(); it++)
+	{
+		Student tmp = (*it);
+		tmp.toString();
+	}
+
+	system("pause");
+	return 0;
+}
+
+

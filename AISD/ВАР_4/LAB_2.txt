@@ -1,0 +1,148 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+
+using namespace std;
+
+struct TNode;
+//описываем тип-указатель на элемент структуры 
+typedef TNode* PNode; //элемент списка 
+struct TNode
+{
+	int Data;  //поле данных  
+	PNode Next; //поле указателя на следующий элемент 
+};
+
+//Добавление элемента в начало списка
+void AddFirst(PNode& First, int Data)
+{
+	PNode p = new TNode;
+	//указатель на новый элемент  
+	p->Data = Data;
+	p->Next = First;
+	First = p;
+}
+
+//Вставка элемента в середину списка 
+void AddAfter(PNode& Pred, int Data)
+{
+	PNode p = new TNode;
+	p->Data = Data;
+	p->Next = Pred->Next;
+	Pred->Next = p;
+}
+
+//Вставка элемента в конец списка 
+void AddLast(PNode& First, int Data)
+{
+	PNode p1, p2 = First;
+	while (p2->Next != NULL)
+		p2 = p2->Next;
+	p1 = new TNode;
+	p1->Data = Data;
+	p2->Next = p1;
+	p1->Next = NULL;
+}
+
+//Удаление элемента из начала списка 
+void DelFirst(PNode& First)
+{
+	PNode p = First;
+	First = First->Next;
+	delete p;
+}
+
+//Удаление элемента из середины списка
+void DelAfter(PNode& Pred)
+{
+	PNode p = Pred->Next;
+	if (p)
+	{
+		Pred->Next = p->Next;
+		delete p;
+	}
+}
+
+//Удаление элемента из конца списка 
+void DelLast(PNode& First)
+{
+	PNode p1 = First, p2;
+	while (p1->Next->Next != NULL)
+		p1 = p1->Next;
+	p2 = p1->Next;
+	p1->Next = NULL;
+	delete p2;
+}
+
+//Заполнение списка 
+void InputList(PNode& First)
+{
+	cout << "ВВОД СПИСКА" << endl;
+	int n, Data;
+	cout << "Введите количество элементов: ";
+	cin >> n;
+	for (int i = 1; i <= n; i++)
+	{
+		cout << "Введите элемент: ";
+		cin >> Data;
+		AddFirst(First, Data);
+	}
+	cout << endl;
+}
+
+//Обход и печать списка 
+void PrintList(PNode First)
+{
+	cout << "ВЫВОД СПИСКА" << endl;
+	PNode p = First;
+	while (p)
+	{
+		cout << p->Data << ' ';
+		p = p->Next;
+	}
+	cout << endl;
+}
+
+void connect(PNode& list, PNode& list1, PNode& list2)
+{
+	PNode p = list1;
+	while (p)
+	{
+		AddFirst(list, p->Data);
+		p = p->Next;
+	}
+
+	p = list2;
+	while (p)
+	{
+		AddFirst(list, p->Data);
+		p = p->Next;
+	}
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	PNode list1 = NULL;
+	PNode list2 = NULL;
+	PNode list = NULL;
+
+	cout << "Список №1" << endl;
+	InputList(list1);
+	PrintList(list1);
+
+	cout << "Список №2" << endl;
+	InputList(list1);
+	PrintList(list2);
+
+	cout << "Новый список" << endl;
+	connect(list, list1, list2);
+	PrintList(list);
+
+	system("pause");
+	return 0;
+}

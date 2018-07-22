@@ -1,0 +1,102 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <fstream>
+#include <time.h>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	srand((unsigned)time(NULL));
+
+	const int m = 4, n = 5;
+
+	int matriza[m][n];
+
+	cout << "Ваша случайная матрица: " << endl;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			matriza[i][j] = rand() % 9;
+			cout << matriza[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	cout << "Замена первого и последнего столбца в матрице: " << endl;
+	for (int i = 0; i < 4; i++)
+	{
+		int tmp = 0;
+		int j = 0;
+
+		tmp = matriza[i][j];
+		matriza[i][j] = matriza[i][j+4];
+		matriza[i][j + 4] = tmp;;
+
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			cout << matriza[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	system("pause");
+	return 0;
+}
+*******************************************************
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <fstream>
+#include <time.h>
+
+using namespace std;
+
+void func1(int m[])
+{
+	for (int i = 0; i < 20; i++)
+	{
+		m[i] = rand() % 5;
+		cout << m[i] << " ";
+	}
+	cout << endl;
+}
+
+void func2(int m[])
+{
+	int count = 0;
+	for (int i = 0; i < 19; i++)
+	{
+		if (m[i]  == 0 && m[i+1] ==  0)
+			count++;
+	}
+	cout << count << endl;
+}
+
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	srand((unsigned)time(NULL));
+
+	int m[20];
+
+	cout << "Ваш массив: " << endl;
+	func1(m);
+	cout << "Cтолько раз в нем встретились два подряд идущих нулевых элемента. ";
+	func2(m);
+
+	system("pause");
+	return 0;
+}

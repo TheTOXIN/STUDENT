@@ -1,0 +1,79 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <Windows.h>
+
+using namespace std;
+
+int main()
+{
+	double e = 0.001, s = 0, sum = 0, w = 0;
+	int fact = 1;
+
+	for (int i = 1; i <= 20; i++)
+	{
+		s = 0;
+		do
+		{
+			int j = 1;
+			for (int k = 1; k <= j; k++)
+				fact = fact * k;
+			s = sqrt(i + j) / fact;
+			sum = sum + s;
+		} 
+		while (fabs(s) < e);
+		w = w + sum * log(i);
+	}
+	w = w * 2.7;
+	cout << w << endl;
+	system("pause");
+	return 0;
+}
+**********************************************************
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <Windows.h>
+
+using namespace std;
+
+int main()
+{
+	double Z = 0, max = 0, min = 0;
+	double y = 0, dy = 0.5;
+	double x = 0, dx = 0.2;
+	do
+	{
+		y = 0;
+		do
+		{   
+			if (x > 0 && y < 0.5)
+				Z = pow(x, 2) + y;
+			else if (x < y && x > 0.5)
+				Z = sqrt(pow(y, 2) + sin(x));
+			else if (x > y && x >= 0.5)
+				Z = pow(x, 2) + cos(y);
+			if (x == 0)
+			{
+				min = Z;
+				max = Z;
+			}
+			if (Z > max)
+				max = Z;
+			if (Z < min)
+				min = Z;
+			cout << "Z = " << Z << endl;
+			y += dy;
+		} 
+		while (y <= 2.0);
+	
+		x += dx;
+	} 
+	while (x <= 1.0);
+
+	cout << "Z max = " << max << endl;
+	cout << "Z min = " << min << endl;
+
+	system("pause");
+	return 0;
+}

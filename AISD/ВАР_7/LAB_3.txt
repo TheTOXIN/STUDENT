@@ -1,0 +1,113 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+
+using namespace std;
+
+double average = 0;
+
+struct element
+{
+	double k;
+	element* left;
+	element* right;
+};
+element *tree = NULL, *P, *Q, *tree1 = NULL;
+
+void maketree(double a)
+{
+	tree = new element;
+	tree->k = a;
+	tree->right = tree->left = NULL;
+	P = tree;
+	Q = NULL;
+}
+
+void add(double a)
+{
+	if (!tree) {
+		maketree(a);
+		return;
+	}
+
+	P = Q = tree;
+
+	while (P != NULL)
+	{
+		Q = P;
+		if (a < P->k)
+			P = P->left;
+		else
+			P = P->right;
+	}
+
+	if (a < Q->k)
+	{
+		Q->left = new element;
+		Q->left->k = a;
+		Q->left->left = Q->left->right = NULL;
+
+	}
+	else
+	{
+		Q->right = new element;
+		Q->right->k = a;
+		Q->right->left = Q->right->right = NULL;
+	}
+}
+
+void printTree(element* tree)
+{
+	if (tree)
+	{
+		printTree(tree->left);
+		cout << tree->k << " - ";
+		printTree(tree->right);
+		if (tree->left == NULL && tree->right == NULL)
+			cout << endl;
+	}
+}
+
+void inputTree(int count)
+{
+	double n;
+	for (int i = 0; i < count; i++)
+	{
+		cout << "ббедхре щкелемр ╧" << i << " :";
+		cin >> n;
+		add(n);
+	}
+	cout << endl;
+}
+
+void COPY(element* tree)
+{
+	if (tree)
+	{
+		COPY(tree->left);
+		COPY(tree->right);
+	}
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	int count;
+	cout << "ббедхре йнк-бн щкелемрнб: " << endl;
+	cin >> count;
+
+	inputTree(count);
+	cout << "депебн - T" << endl;
+	printTree(tree);
+
+	cout << "депебн - T1" << endl;
+	COPY(tree);
+	printTree(tree);
+
+	system("pause");
+	return 0;
+}

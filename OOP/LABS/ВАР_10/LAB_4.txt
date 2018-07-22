@@ -1,0 +1,76 @@
+#include<iostream>
+#include<string>
+#include<conio.h>
+#include<time.h>
+#include<windows.h>
+
+using namespace std;
+
+class Document
+{
+public:
+	string text;
+	Document(string text);
+};
+
+Document::Document(string text)
+{
+	this->text = text;
+}
+
+class —orrespond
+{
+public:
+	string name;
+	—orrespond(string name);
+};
+
+—orrespond::—orrespond(string name)
+{
+	this->name = name;
+}
+
+class Mail : Document, —orrespond
+{
+public:
+	string info;
+	void sendMessage();
+	Mail(string info, string text, string name);
+};
+
+void Mail::sendMessage()
+{
+	cout << "SEND MESSAGE..." << endl;
+	cout << "_____________________________" << endl;
+	cout << "===" << this->info << "===" << endl;
+	cout << " - " << this->text << endl;
+	cout << "             " << this->name << endl;
+	cout << "_____________________________" << endl;
+	cout << endl;
+}
+
+Mail::Mail(string info, string text, string name)
+	: Document(text), —orrespond(name)
+{
+	this->info = info;
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	Mail* mails[3];
+
+	mails[0] = new Mail("»Õ‘Œ_1", "“≈ —“_1", "»Ãﬂ_1");
+	mails[1] = new Mail("»Õ‘Œ_2", "“≈ —“_2", "»Ãﬂ_2");
+	mails[2] = new Mail("»Õ‘Œ_3", "“≈ —“_3", "»Ãﬂ_3");
+
+	for (int i = 0; i < 3; i++)
+	{
+		mails[i]->sendMessage();
+	}
+
+	system("pause");
+	return 1;
+}

@@ -1,0 +1,57 @@
+﻿  stdafx.cpp
+  WindowView.cpp
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(66): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(67): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(68): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(91): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(92): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(106): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(107): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(108): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(109): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(120): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(121): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(122): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(131): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(134): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(135): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(158): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(171): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(173): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(174): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(185): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(194): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(205): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(212): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(225): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(230): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(237): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(242): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(290): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(306): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(322): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\windowview.cpp(323): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Tetris.cpp
+  main.cpp
+e:\developer\c++\курсач\window\project_tetris\project_tetris\main.cpp(18): warning C4101: 'tetris': unreferenced local variable
+  Printer.cpp
+  Player.cpp
+  MediaPlayer.cpp
+  KeyController.cpp
+e:\developer\c++\курсач\window\project_tetris\project_tetris\keycontroller.cpp(114): warning C4305: '+=': truncation from 'double' to 'float'
+e:\developer\c++\курсач\window\project_tetris\project_tetris\keycontroller.cpp(121): warning C4305: '-=': truncation from 'double' to 'float'
+e:\developer\c++\курсач\window\project_tetris\project_tetris\keycontroller.cpp(163): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Genetic.cpp
+  Game.cpp
+e:\developer\c++\курсач\window\project_tetris\project_tetris\game.cpp(185): warning C4244: '=': conversion from 'sf::Int64' to 'float', possible loss of data
+e:\developer\c++\курсач\window\project_tetris\project_tetris\game.cpp(196): warning C4305: '-=': truncation from 'double' to 'float'
+  Figure.cpp
+  Field.cpp
+  Factory.cpp
+  AI.cpp
+  Generating Code...
+e:\developer\c++\курсач\window\project_tetris\project_tetris\factory.cpp(69): warning C4715: 'CFactory::createFigure': not all control paths return a value
+e:\developer\c++\курсач\window\project_tetris\project_tetris\field.cpp(41): warning C4715: 'CField::getValue': not all control paths return a value
+  Project_Tetris.vcxproj -> E:\DEVELOPER\C++\КУРСАЧ\WINDOW\Project_Tetris\Debug\Project_Tetris.exe
+  Project_Tetris.vcxproj -> E:\DEVELOPER\C++\КУРСАЧ\WINDOW\Project_Tetris\Debug\Project_Tetris.pdb (Full PDB)

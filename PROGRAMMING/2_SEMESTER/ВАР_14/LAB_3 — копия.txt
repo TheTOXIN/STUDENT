@@ -1,0 +1,106 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale>
+#include <string>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+int L, K;
+
+struct Node;
+typedef Node* ptrNode;
+struct Node
+{
+	string FIO;
+	ptrNode next;
+};
+ptrNode group1 = NULL;
+ptrNode group2 = NULL;
+
+void addFirst(ptrNode& first, string FIO)
+{
+	ptrNode p = new Node;
+	p->FIO = FIO;
+	p->next = first;
+	first = p;
+}
+
+void inputList(ptrNode& first)
+{
+	int n;
+	string FIO;
+	cout << "Введите кол-во студентов: ";
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cout << "Введите фамилию:" << i+1 << "студента:";
+		cin >> FIO;
+		addFirst(first, FIO);
+	}
+	cout << endl;
+}
+
+void DelAfter(ptrNode& Pred) 
+{ 
+	ptrNode p = Pred->next;
+	if (p) 
+	{ 
+		Pred->next = p->next;   
+		delete p; 
+	} 
+}
+
+void printList(ptrNode& first)
+{
+	ptrNode p = first;
+	while (p)
+	{
+		cout << p->FIO << endl;
+		p = p->next;
+	}
+	cout << endl;
+}
+
+void func(ptrNode& first)
+{
+	cout << "Введите кол-во -L-" << endl;
+	cin >> L;
+	cout << "Введите персчет -K-" << endl;
+	cin >> K;
+
+	ptrNode p1 = first;
+
+	for (int i = 0; i < L; i++)
+	{
+		for (int j = 0; j < K; j++)
+		{
+				p1 = p1->next;
+		}
+		addFirst(group2, p1->FIO);
+		DelAfter(p1);
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+
+	cout << "Заполните список студентов 1 группы:" << endl;
+	inputList(group1);
+	cout << "Заполните список студентов 2 группы:" << endl;
+	inputList(group2);
+	
+	func(group1);
+
+	cout << "Список студентов 1 группы:" << endl;
+	printList(group1);
+	cout << "Список студентов 2 группы:" << endl;
+	printList(group2);
+
+	system("pause");
+	return 0;
+}

@@ -1,0 +1,71 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <time.h>
+#include <windows.h>
+
+using namespace std;
+
+int** maker(int m, int n)//функция для сохдания двумерного динамического массива
+{
+	int** t = new int*[m];
+	for (int i = 0; i < m; i++)
+	{
+		t[i] = new int[n];
+		for (int j = 0; j < n; j++)
+		{
+			t[i][j] = rand() % 10;//для каждого элемента матрицы задаем случайное число от 0 до 9
+		}
+	}
+	return t;
+}
+
+void printer(int m, int n, int **matr)//выводим матрицу в консоль
+{
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cout.width(4);//задаем ширину вывода для красоты
+			cout << matr[i][j];
+		}
+		cout << endl;
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	srand(time(NULL));//оптимизируем функцию рандомности
+
+	int m, n;//m - кол-во сторк n - кол-во столбцов
+	cout << "Введите размер матриц M x N: " << endl;
+	cin >> m >> n;
+
+	cout << "Матрица А :" << endl;
+	int **A = maker(m, n);//вызываем функцию создания массива которая возращает матрицу и помещает в переменную A
+	printer(m, n, A);//вызываем функцию вывода матрицы посылая в неё матрицу A и размеры
+	
+	//пробегаемся по матрице через два цикла
+	for (int i = 0; i < n; i++)//в первом проходимся по столбцам
+	{
+		for (int j = 0; j < m; j++)//во тором по строчкам
+		{
+			if (A[j][i] % 2 != 0)//если элемент матрицы не четный
+				break;//выходим из 2 цикла и начинаем проверять следующий столбец
+			if (j == m - 1)//если мы не вышли из цикла и при этом мы на последнем элементе столбца
+				cout << "Cтолбце номер " << i + 1 << " четный" << endl;//значит элементы до этого были четнымыми
+		}
+	}
+
+	for (int i = 0; i < m; i++)//освобождаем память от динамического массива A
+		delete[] A[i];
+	delete[] A;
+
+	system("pause");
+	return 0;
+}

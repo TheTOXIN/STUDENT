@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDownloader", "FileDownloader.csproj", "{9CBD599E-DD9D-4F4D-A4D8-3EDF177FF636}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDownloaderTester", "..\FileDownloaderTester\FileDownloaderTester.csproj", "{DDF8D818-6A67-4037-9ABA-E944CD4705B0}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{9CBD599E-DD9D-4F4D-A4D8-3EDF177FF636}.Debug.ActiveCfg = Debug|.NET
+		{9CBD599E-DD9D-4F4D-A4D8-3EDF177FF636}.Debug.Build.0 = Debug|.NET
+		{9CBD599E-DD9D-4F4D-A4D8-3EDF177FF636}.Release.ActiveCfg = Release|.NET
+		{9CBD599E-DD9D-4F4D-A4D8-3EDF177FF636}.Release.Build.0 = Release|.NET
+		{DDF8D818-6A67-4037-9ABA-E944CD4705B0}.Debug.ActiveCfg = Debug|.NET
+		{DDF8D818-6A67-4037-9ABA-E944CD4705B0}.Debug.Build.0 = Debug|.NET
+		{DDF8D818-6A67-4037-9ABA-E944CD4705B0}.Release.ActiveCfg = Release|.NET
+		{DDF8D818-6A67-4037-9ABA-E944CD4705B0}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

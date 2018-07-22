@@ -1,0 +1,117 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+
+using namespace std;
+
+double average = 0;
+
+struct element
+{
+	double k;
+	element* left;
+	element* right;
+};
+element *tree = NULL, *P, *Q;
+
+void maketree(double a)
+{
+	tree = new element;
+	tree->k = a;
+	tree->right = tree->left = NULL;
+	P = tree;
+	Q = NULL;
+}
+
+void add(double a) 
+{
+	if (!tree) {
+		maketree(a);
+		return;
+	}
+
+	P = Q = tree;
+
+	while (P != NULL)
+	{
+		Q = P;
+		if (a < P->k)
+			P = P->left;
+		else
+			P = P->right;
+	}
+
+	if (a < Q->k)
+	{
+		Q->left = new element;
+		Q->left->k = a;
+		Q->left->left = Q->left->right = NULL;
+
+	}
+	else
+	{
+		Q->right = new element;
+		Q->right->k = a;
+		Q->right->left = Q->right->right = NULL;
+	}
+}
+
+void printTree(element* tree)
+{
+	if (tree)
+	{
+		printTree(tree->left);
+		cout << tree->k << " - ";
+		printTree(tree->right);
+		if (tree->left == NULL && tree->right == NULL)
+			cout << endl;
+	}
+}
+
+void inputTree(int count)
+{
+	double n;
+	for (int i = 0; i < count; i++)
+	{
+		cout << "ÂÂÅÄÈÒÅ ÝËÅÌÅÍÒ ¹" << i << " :";
+		cin >> n;
+		add(n);
+	}
+	cout << endl;
+}
+
+
+void countAverage(element* tree)
+{
+	if (tree)
+	{
+		average += tree->k;
+		countAverage(tree->left);
+		countAverage(tree->right);
+	}
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	int count;
+	cout << "ÂÂÅÄÈÒÅ ÊÎË-ÂÎ ÝËÅÌÅÍÒÎÂ: " << endl;
+	cin >> count;
+
+	inputTree(count);
+	printTree(tree);
+	countAverage(tree);
+
+	average /= count;
+	cout << "ÑÐÅÄÍÅÅ ÇÍÀ×ÅÍÈÅ ÄÅÐÅÂÀ = " << average << endl;
+
+	add(average);
+	printTree(tree);
+
+	system("pause");
+	return 0;
+}

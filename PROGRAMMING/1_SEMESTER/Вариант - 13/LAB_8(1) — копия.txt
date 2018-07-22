@@ -1,0 +1,44 @@
+#include <iostream>
+
+#pragma argsused
+
+bool function(int p)
+{
+	bool b1 = false;
+
+	for (int i = 2; i < p; i++)//в этом цикле мы делим на каждую цифру
+	{
+		if (p % i == 0)//если число делится без остатка
+			b1 = true;//то значит что оно не простое и делаем b1 истиной
+	}
+
+	if (b1 == false)//если b1 ложное, тоесть наше передоваемое число простое, то функция возращает истину в место вызова
+	{
+		return true;
+	}
+	return false;
+	
+}
+
+int main()
+{
+	int count = 0;//функция хранит колличество простых чисел
+	int m, n;
+	cout << "Input interval m - n: " << endl;
+	cin >> m >> n;
+
+	cout << "Simple numbers: ";
+	for (int i = m; i <= n; i++)
+	{	//вызываем функцию function и передаем туда числа от n до m
+		//функция возращает истину или ложь 
+		if (function(i))//если она вернула истину то значит что наше число простое
+		{
+			count++;//увеличиваем count на 1
+			cout << i << " ";//выводим это простое число на экран
+		}
+	}
+	cout << endl << "Сount = " << count << endl;
+
+	getch();
+	return 0;
+}

@@ -1,0 +1,63 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+struct Adress
+{
+	char street_name[30];
+	int street_number;
+};
+
+struct Students
+{
+	char FIO[30];
+	int number;
+	Adress adr;
+};
+
+void input(Students studArray[], int kol)
+{
+	for (int i = 0; i < kol; i++)
+		cin >> studArray[i].FIO >> studArray[i].number >> studArray[i].adr.street_name >> studArray[i].adr.street_number;
+	cout << endl;
+}
+
+void output(Students studArray[], int kol)
+{
+	for (int i = 0; i < kol; i++)
+		cout << studArray[i].FIO << ": Number phone - " << studArray[i].number << ", Addres - " 
+			<< studArray[i].adr.street_name << " " << studArray[i].adr.street_number << endl;
+	cout << endl;
+}
+
+int main()
+{
+	const int kol = 3;
+	Students studArray[kol];
+
+	cout << "Input: FIO, number, addres for " << kol << " students:" << endl;
+	input(studArray, kol);
+	cout << "ArrayList Students:" << endl;
+	output(studArray, kol);
+
+
+
+	cout << "Students without number phones: " << endl;
+	for (int i = 0; i < kol; i++)
+	{
+		if (studArray[i].number == 0)
+		{
+			cout << studArray[i].FIO << ": Number phone - " << studArray[i].number 
+				<< ", Addres - " << studArray[i].adr.street_name << " " << studArray[i].adr.street_number << endl;
+		}
+	}
+
+	system("pause");
+	return 0;
+}

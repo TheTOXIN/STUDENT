@@ -1,0 +1,40 @@
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include <locale>
+#include <windows.h>
+
+using namespace std;
+
+int main() {
+
+	SetConsoleCP(1251);//подключаем ввод русских символов в консоли
+	SetConsoleOutputCP(1251);//и вывод русских символов 
+
+	string name;//переменная name типа string(строка) бдует хранить имя
+	string chars;//chars набор символов
+
+	cout << "Введите ваше имя:" << endl;
+	cin >> name;//вводим имя 
+
+	cout << "Введите символы:" << endl;
+	cin >> chars;//вводим символы
+
+	cout << "Кол-во букв имени из множества символов:" << endl;
+	int count;//переменная для подсчета кол-во букв имени из символов
+	for (int i = 0; i < name.length(); i++) // создаем цикл для пробежки по каждому символу из name ("name.length()" это длина строки)
+	{
+		count = 0;//приравниваем к 0 при каждом новом символе из name
+		for (int j = 0; j < chars.length(); j++)// создаем внутренний цикл для пробежки по каждому символу из chars ("chars.length()" это длина строки)
+		{
+			if (name[i] == chars[j])// если буква из имени равняется букве из символов
+			{
+				count++;//увеличиваем count на 1
+			}
+		}
+		cout << name[i] << " - " << count << endl;//выводим букву из имени и её кол-во
+	}
+
+	system("pause");
+	return 0;
+}

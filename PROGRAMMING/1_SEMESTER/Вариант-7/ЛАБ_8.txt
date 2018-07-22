@@ -1,0 +1,116 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <Windows.h>
+
+using namespace std;
+
+void operation(int n)
+{
+	double rez1 = 0;
+	double rez2 = 0;
+
+	for (int a = 1; a <= n; a++)
+	{
+		for (int b = 1; b <= n; b++)
+		{
+			rez1 = a - b + a % b;
+			rez2 = b - a + b % a;
+
+			if (rez1 == rez2)
+				cout << "a = " << a << "  " << "b = " << b << endl;
+		}
+	}
+}
+
+int main()
+{
+	setlocale(0, "RUS");
+
+	int n;
+	cout << "Введите число n: " << endl;
+	cin >> n;
+	cout << "Пары a и b не привосходящие n: " << endl;
+	operation(n);
+
+	system("pause");
+	return 0;
+}
+***********************************************************************************************
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <Windows.h>
+
+using namespace std;
+
+void function_1(int m[10])
+{
+	for (int i = 0; i < 10; i++)
+	{
+		cout << "Введите элемнт номер " << i << " : ";
+		cin >> m[i];
+	}
+}
+
+void function_2(int m[10])
+{
+	for (int i = 0; i < 10; i++)
+	{
+		cout << m[i] << " ";
+	}
+	cout << endl;
+}
+
+void function_3(int m[10])
+{
+	int max;
+	int min;
+	int i1;
+	int i2;
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (i == 0)
+		{
+			max = m[i];
+			min = m[i];
+		}
+		if (m[i] >= max)
+		{
+			max = m[i];
+			i1 = i;
+		}
+		if (m[i] <= min)
+		{
+			min = m[i];
+			i2 = i;
+		}
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (i1 == i)
+			m[i] = min;
+		if (i2 == i)
+			m[i] = max;
+	}
+}
+
+int main()
+{
+	setlocale(0, "RUS");
+	
+	int m[10];
+	cout << "Введите массив: " << endl;
+	function_1(m);
+	cout << "Ваш массив: " << endl;
+	function_2(m);
+	cout << "Замаена максимального и минимального значения: " << endl;
+	function_3(m);
+	function_2(m);
+	system("pause");
+	return 0;
+}

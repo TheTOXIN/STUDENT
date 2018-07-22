@@ -1,0 +1,83 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <time.h>
+#include <windows.h>
+
+using namespace std;
+
+int** maker(int m, int n)
+{
+	int** t = new int*[m];
+	for (int i = 0; i < m; i++)
+	{
+		t[i] = new int[n];
+		for (int j = 0; j < n; j++)
+		{
+			t[i][j] = rand() % 10;
+		}
+	}
+	return t;
+}
+
+void printer(int m, int n, int **matr)
+{
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cout.width(4);
+			cout << matr[i][j];
+		}
+		cout << endl;
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	srand(time(0));
+
+	int m, n;
+	cout << "Введите размер матриц M x N: " << endl;
+	cin >> m >> n;
+
+	cout << "Матрица А :" << endl;
+	int **A = maker(m, n);
+	printer(m, n, A);
+
+
+	cout << "Сортировка по строкам :" << endl;
+	for (int i = 0; i < m-1; i++)
+	{
+		int sred1 = 0;
+		int sred2 = 0;
+
+		for (int j = 0; j < n; j++)
+		{
+			sred1 += A[i][j];
+			sred2 += A[i+1][j];
+		}
+		sred1 /= n;
+		sred2 /= n;
+
+		if (sred2 > sred1)
+		{
+			int *tmp = A[i];
+			A[i] = A[i + 1];
+			A[i + 1] = tmp;
+		}
+	}
+	printer(m, n, A);
+
+	for (int i = 0; i < m; i++)
+		delete[] A[i];
+	delete[] A;
+
+	system("pause");
+	return 0;
+}

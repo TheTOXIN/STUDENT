@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <fstream>
+#include <stack>
+
+using namespace std;
+
+stack <int> s;
+
+void input()
+{
+	int in;
+	int  count;
+
+	cout << "Введите размер:" << endl;
+	cin >> count;
+
+	cout << "Добавте элементы в стек" << endl;
+	for (int i = 0; i < count; i++)
+	{
+		cin >> in;
+		s.push(in);
+	}
+	cout << endl;
+}
+
+void print()
+{
+	stack <int> tmp = s;
+	cout << "Стек: " << endl;
+	int count = tmp.size();
+	for (int i = 0; i < count; i++)
+	{
+		int c = tmp.top();
+		cout << c << endl;
+		tmp.pop();
+	}
+	cout << endl;
+}
+
+void replace()
+{
+	stack<int> tmp = s;
+	int max = 0;
+
+	for (int i = 0; i < s.size(); i++)
+	{ 
+		int n = tmp.top();
+
+		if (n > max)
+			max = tmp.top();
+
+		tmp.pop();
+	}
+
+	cout << "Максимальный эелмент = " << max << endl;
+	cout << "Добавление 0..." << endl;
+
+	int count = s.size();
+	for (int i = 0; i < count; i++)
+	{
+		if (s.top() == max)
+		{
+			tmp.push(0);
+		}
+		tmp.push(s.top());
+		s.pop();
+	}
+
+	s = tmp;
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	input();
+	print();
+	replace();
+	print();
+
+	system("pause");
+	return 0;
+}

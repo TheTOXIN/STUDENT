@@ -1,0 +1,88 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <string>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+struct Node;
+typedef Node* ptrNode;
+struct Node
+{
+	string FIO;
+	double mark;
+	ptrNode next;
+};
+ptrNode first1 = NULL;
+ptrNode first2 = NULL;
+
+void addFirst(ptrNode& first, string FIO, double mark)
+{
+	ptrNode p = new Node;
+	p->FIO = FIO;
+	p->mark = mark;
+	p->next = first;
+	first = p;
+}
+
+void inputList(ptrNode& first)
+{
+	int n;
+	double mark;
+	string FIO;
+	cout << "Введите кол-во студентов: ";
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cout << "Введите фамилию и среднею оценку студента: ";
+		cin >> FIO;
+		cin >> mark;
+		addFirst(first, FIO, mark);
+	}
+}
+
+void printList(ptrNode& first)
+{
+	ptrNode p = first;
+	while (p)
+	{
+		cout << p->FIO << "-" << p->mark << endl;
+		p = p->next;
+	}
+	cout << endl;
+}
+
+void func(ptrNode& first)
+{
+	ptrNode p = first;
+	while (p)
+	{
+		if (p->mark < 4)
+		{
+			addFirst(first2, p->FIO, p->mark);
+		}
+		p = p->next;
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+
+	cout << "Заполните список студентов" << endl;
+	inputList(first1);
+	cout << "Ваш список студентов" << endl;
+	printList(first1);
+
+	func(first1);
+
+	cout << "Список студентов с средней оценкой < 4" << endl;
+	printList(first2);
+
+	system("pause");
+	return 0;
+}

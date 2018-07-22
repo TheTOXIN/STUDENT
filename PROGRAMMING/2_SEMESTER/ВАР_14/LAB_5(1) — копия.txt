@@ -1,0 +1,52 @@
+#include "stdafx.h"
+#include "iostream"
+#include <math.h>
+#include "string"
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+const int n = 5;//кол-во строк
+const int max = 80;//максимальное кол-во символов(по условию)
+string s = "text.txt";//имя файла
+ofstream fout(s);//поток вывода файла
+ifstream fin(s);//поток ввода файла
+
+void input(string txt[n])//функция для ввода файла
+{
+	for (int i = 0; i < n; i++)
+	{
+		cin >> txt[i];
+		fout << txt[i] << endl;
+	}
+	cout << endl;
+}
+
+void update(string txt[n])//функция перевода строк и вывода файла
+{
+	for (int i = 0; i < n; i++)//для каждой строчки
+	{
+		for (int j = 0; j < max - txt[i].length(); j++)//увеличиваем кол_во пробелов в зависимости от длины строчки
+		{
+			txt[i] = " " + txt[i];
+		}
+		cout << txt[i] << endl;
+		fout << txt[i] << endl;
+	}
+}
+
+int main()
+{
+	SetConsoleCP(1251);//ставим русский язык в консоль
+	SetConsoleOutputCP(1251);
+
+	string txt[n];
+	cout << "Input text" << endl;
+	input(txt);
+	cout << "Update text" << endl;
+	update(txt);
+
+	system("pause");
+	return 0;
+}

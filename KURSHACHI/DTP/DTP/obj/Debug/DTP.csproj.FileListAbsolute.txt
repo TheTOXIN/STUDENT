@@ -1,0 +1,9 @@
+E:\DEVELOPER\С++\ComputerSystems\DTP\DTP\bin\Debug\DTP.exe.config
+E:\DEVELOPER\С++\ComputerSystems\DTP\DTP\bin\Debug\DTP.exe
+E:\DEVELOPER\С++\ComputerSystems\DTP\DTP\bin\Debug\DTP.pdb
+E:\DEVELOPER\С++\ComputerSystems\DTP\DTP\obj\Debug\DTP.csprojResolveAssemblyReference.cache
+E:\DEVELOPER\С++\ComputerSystems\DTP\DTP\obj\Debug\DTP.Properties.Resources.resources
+E:\DEVELOPER\С++\ComputerSystems\DTP\DTP\obj\Debug\DTP.csproj.GenerateResource.Cache
+E:\DEVELOPER\С++\ComputerSystems\DTP\DTP\obj\Debug\DTP.exe
+E:\DEVELOPER\С++\ComputerSystems\DTP\DTP\obj\Debug\DTP.pdb
+E:\DEVELOPER\С++\ComputerSystems\DTP\DTP\obj\Debug\DTP.Form1.resources

@@ -1,0 +1,75 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <string.h>
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+const int kol = 5;
+typedef char String[100];
+
+void input(String txt[kol], String s)
+{
+	ofstream fout(s);
+	for (int i = 0; i < kol; i++)
+	{
+		cin >> txt[i];
+		fout << txt[i] << endl;
+	}
+	cout << "____________________" << endl;
+}
+
+void output(String txt[kol], String s)
+{
+	ifstream fin(s);
+	for (int i = 0; i < kol; i++)
+	{
+		fin >> txt[i];
+		cout << txt[i] << endl;
+	}
+	cout << "____________________" << endl;
+}
+
+void maker(String txt_1[kol], String txt_2[kol])
+{
+	ofstream fout("text_3");
+	for (int i = 0; i < kol; i++)
+	{
+		for (int j = 0; j < kol; j++)
+		{
+			if (!strcmp(txt_1[i], txt_2[j]))
+			{
+				cout << txt_1[i] << endl;
+				fout << txt_1[i] << endl;
+			}
+		}
+	}
+	cout << "____________________" << endl;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+
+	cout << "Введите текст № 1" << endl;
+	String txt_1[kol];
+	input(txt_1, "text_1.txt");
+
+	cout << "Введите текст № 2" << endl;
+	String txt_2[kol];
+	input(txt_2, "text_2.txt");
+
+	cout << "Файл №1" << endl;
+	output(txt_1, "text_1.txt");
+	cout << "Файл №2" << endl;
+	output(txt_2, "text_2.txt");
+
+	cout << "Новый файл:" << endl;
+	maker(txt_1, txt_2);
+
+	system("pause");
+	return 0;
+}

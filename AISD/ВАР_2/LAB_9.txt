@@ -1,0 +1,139 @@
+#include<iostream>
+#include<string>
+#include<conio.h>
+#include<time.h>
+#include<windows.h>
+
+using namespace std;
+
+int A[1000];
+int len = 0;
+
+void showMenu()
+{
+	system("cls");
+	cout << "===Выберети пункт===" << endl;
+	cout << "1.Вывести массив" << endl;
+	cout << "2.Ввести массив" << endl;
+	cout << "3.Заполнить случайно" << endl;
+	cout << "4.Сортировать (QUICKSORT)" << endl;
+	cout << "5.Показать MAX и MIN" << endl;
+	cout << "6.Выход" << endl;
+}
+
+void inputSize()
+{
+	cout << "Введите кол-во номеров: ";
+	cin >> len;
+}
+
+void outputArray()
+{
+	cout << "ВЫВОД МАССИВА" << endl;
+	for (int i = 0; i < len; i++)
+	{
+		cout << i << "# = " << A[i] << endl;
+	}
+	cout << endl;
+
+	system("pause");
+}
+
+void inputArray()
+{
+	inputSize();
+
+	for (int i = 0; i < len; i++)
+	{
+		cout << i + 1 << "# ";
+		cin >> A[i];
+	}
+}
+
+void randomArray()
+{
+	inputSize();
+
+	for (int i = 0; i < len; i++)
+	{
+		A[i] = rand() % 100;
+	}
+
+	system("pause");
+}
+
+void quickSort(int* m, int j)
+{
+	int size = j;
+	int k = 0;
+	int p = m[(int)(j / 2)];
+	int tmp = 0;
+
+	do
+	{
+		while (m[k] > p)
+			k++;
+		while (m[j] < p)
+			j--;
+
+		if (k <= j)
+		{
+			tmp = m[k];
+			m[k] = m[j];
+			m[j] = tmp;
+			k++;
+			j--;
+		}
+
+	} while (k <= j);
+
+	if (j > 0)
+		quickSort(m, j);
+	if (size > k)
+		quickSort(m + k, size - k);
+}
+
+void sortArray()
+{
+	cout << "Сортировка..." << endl;
+
+	quickSort(A, len - 1);
+
+	cout << "Нажмите любую клавишу" << endl;
+	system("pause");
+}
+
+void showMaxAndMin()
+{
+	sortArray();
+	cout << "MAX элемент = " << A[0] << endl;
+	cout << "MIN элемент = " << A[len - 1] << endl;
+	system("pause");
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	int choose = 0;
+	while (choose != 6)
+	{
+		showMenu();
+		cin >> choose;
+		switch (choose)
+		{
+		case 1: outputArray(); break;
+		case 2: inputArray(); break;
+		case 3: randomArray(); break;
+		case 4: sortArray(); break;
+		case 5: showMaxAndMin(); break;
+		default: cout << "Ошибка ввода" << endl; break;
+		}
+	}
+
+	system("pause");
+	return 1;
+}

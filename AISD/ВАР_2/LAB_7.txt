@@ -1,0 +1,195 @@
+#include<iostream>
+#include<string>
+#include<conio.h>
+#include<time.h>
+#include<windows.h>
+
+using namespace std;
+
+struct Date
+{
+	int day;
+	int mounth;
+	int year;
+};
+
+class Order
+{
+public:
+	int number;
+	string mark;
+	string name;
+	Date last;
+	Date end;
+
+	Order() {
+	
+	}
+
+	Order(string mark, string name)
+	{
+		this->mark = mark;
+		this->name = name;
+		this->number = rand() % 100;
+	}
+};
+
+Order orders[1000];
+int len = 0;
+
+void showMenu()
+{
+	system("cls");
+	cout << "===Выберети пункт===" << endl;
+	cout << "1.Вывести заказы" << endl;
+	cout << "2.Ввести заказы" << endl;
+	cout << "3.Заполнить случайно" << endl;
+	cout << "4.Сортировать по дате" << endl;
+	cout << "5.Выход" << endl;
+}
+
+void inputSize()
+{
+	cout << "Введите кол-во заказов: ";
+	cin >> len;
+}
+
+void outputOrder()
+{
+	cout << "---ЗАКАЗЫ---" << endl;
+	for (int i = 0; i < len; i++) 
+	{
+		cout << endl;
+		cout << "-= № " << orders[i].number << endl;
+		cout << "Имя: " << orders[i].name << " ___ Марка:" << orders[i].mark << endl;
+		cout << "*** Послдений ремнонт: " << orders[i].last.day << " " << orders[i].last.mounth << " " << orders[i].last.year << endl;
+		cout << "Конец ремнонт: " << orders[i].end.day << " " << orders[i].end.mounth << " " << orders[i].end.year << endl;
+		cout << endl;
+	}
+	system("pause");
+}
+
+Date randomtDate()
+{
+	Date date;
+
+	date.day = rand() % 31 + 1;
+	date.mounth = rand() % 12 + 1;
+	date.year = rand() % 18 + 2000;
+
+	return date;
+}
+
+void inputOrder()
+{
+	inputSize();
+
+	for (int i = 0; i < len; i++)
+	{
+		string name, mark;
+		Date l, e;
+
+		cout << "Введите заказ №" << i + 1 << endl;
+		cout << "Имя = ";
+		cin >> name;
+		cout << "Марка = ";
+		cin >> mark;
+		l = randomtDate();
+		e = randomtDate();
+
+		Order tmp(name, mark);
+		tmp.end = e;
+		tmp.last = l;
+
+		orders[i] = tmp;
+	}
+}
+
+void randomOrder()
+{
+	inputSize();
+
+	for (int i = 0; i < len; i++)
+	{
+		string name, mark;
+		Date l, e;
+
+		name = "Имя_" + to_string(rand() % len);
+		mark = "Марка_" + to_string(rand() % len);
+	
+		l = randomtDate();
+		e = randomtDate();
+
+		Order tmp(name, mark);
+		tmp.end = e;
+		tmp.last = l;
+
+		orders[i] = tmp;
+	}
+	system("pause");
+}
+
+int compareDate(Date d1, Date d2)
+{
+	if (d1.year < d2.year)
+		return 1;
+	else if (d1.year == d2.year)
+	{
+		if (d1.mounth < d2.mounth)
+			return 1;
+		else if (d1.mounth == d2.mounth) {
+			if (d1.day < d2.day)
+				return 1;
+		}
+	}
+
+	return -1;
+}
+
+void sortOrder()
+{
+	cout << "Сортировка..." << endl;
+
+	int i, j;
+	Order k;
+
+	for (j = 1; j < len; j++)
+	{
+		k = orders[j];
+		i = j - 1;
+		while (compareDate(k.last, orders[i].last) == 1 && i >= 0)
+		{
+			orders[i + 1] = orders[i];
+			i -= 1;
+		}
+		orders[i + 1] = k;
+	}
+	
+	system("pause");
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	int choose = 0;
+	while (choose != 5)
+	{
+		showMenu();
+		cin >> choose;
+		switch (choose)
+		{
+		case 1: outputOrder(); break;
+		case 2: inputOrder(); break;
+		case 3: randomOrder(); break;
+		case 4: sortOrder(); break;
+		default: cout << "Ошибка ввода" << endl; break;
+		}
+	}
+
+	system("pause");
+	return 1;
+}

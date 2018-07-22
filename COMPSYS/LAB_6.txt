@@ -1,0 +1,87 @@
+#include "iostream"
+#include "time.h"
+#include "math.h"
+#include "locale.h"
+
+using namespace std;
+
+//INPUT
+const int L = 8;//Удаление пользователя от головной части
+const int Lk = 128;//Длина кадра
+const int V = 5;//Время распространения сигнала
+const int I = 15;//Интенсивность передачи
+
+//OUTPUT
+double chenal_effect = 0;//Эффект канала
+double time_distribute = 0;//Время распространения сигнала
+double speed_distribution = 0;//Скорость распространения сигнала
+
+void compute()
+{
+	int G = 1000;
+	
+	double P = V / L;
+	double A = 0.1;
+	double T = L * V;
+	double M = T / A;
+	double C = Lk / M;
+	double Q = 0.36 * 100;
+
+	int Y = 0;
+	double Tl = 0;
+	int W = 0;
+	do
+	{
+		int X = rand() % 100 + 1;
+		if (Q > X) {
+			 Tl = Tl + M + T + 2 * T;
+			Y++;
+			W = 0; 
+		} else {
+			W += 2;
+			Tl = Tl + W * T;
+		}
+	} while (Y == Q);
+
+	double V = (G * (M + T + 2 * T)) / Tl;
+	chenal_effect = V * 100;
+	time_distribute = T / 1000;
+	speed_distribution = C;
+}
+
+void output_result()
+{
+	cout << "Эффект канала: " << chenal_effect << endl;
+	cout << "Время распространения сигнала: " << time_distribute << endl;
+	cout << "Скорость распространения сигнала: " << speed_distribution << endl;
+}
+
+void output_info()
+{
+	cout << "Удаление пользователя от головной части: " << L << endl;
+	cout << "Длина кадра: " << Lk << endl;
+	cout << "Время распространения сигнала: " << V << endl;
+	cout << "Интенсивность передачи : " << I << endl;
+}
+
+void main()
+{
+	srand(time(NULL));
+	setlocale(0, "RUS");
+
+	cout << "VLATIK==HUYATIK" << endl;
+
+	cout << "-=INFO=-" << endl;
+	output_info();
+	cout << endl;
+
+	cout << "COMPUTING..." << endl << endl;
+	compute();
+
+	cout << "-=RESULT=-" << endl;
+	output_result();
+	cout << endl;
+
+	system("pause");
+}
+

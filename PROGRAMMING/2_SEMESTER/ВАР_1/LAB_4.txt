@@ -1,0 +1,94 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+int** maker(int m, int n)
+{
+	int** t = new int*[m];
+	for (int i = 0; i < m; i++)
+	{
+		t[i] = new int[n];
+		for (int j = 0; j < n; j++)
+		{
+			t[i][j] = rand() % 18 - 9;
+		}
+	}
+	return t;
+}
+
+void printer(int m, int n, int **matr)
+{
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cout.width(4);
+			cout << matr[i][j];
+		}
+		cout << endl;
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+
+	int m, n;
+	cout << "Введите четный размер матриц M x N: " << endl;
+	cin >> m >> n;
+
+	cout << "Матрица С :" << endl;
+	int **C = maker(m, n);
+	printer(m, n, C);
+
+	int** A = new int*[m / 2];
+	for (int i = 0; i < m / 2; i++)
+	{
+		A[i] = new int[n / 2];
+	}
+	
+	int** B = new int*[m / 2];
+	for (int i = 0; i < m / 2; i++)
+	{
+		B[i] = new int[n / 2];
+	}
+	
+	int namber = 0;
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (namber % 2 == 0)
+				A[i/2][j/2] = C[i][j];
+			else
+				B[i/2][j/2] = C[i][j];
+			namber++;
+		}
+	}
+
+	cout << "Матрица А" << endl;
+	printer(m / 2, n / 2, A);
+	cout << "Матрица В" << endl;
+	printer(m / 2, n / 2, B);
+
+	for (int i = 0; i < m/2; i++)
+		delete[] A[i];
+	for (int i = 0; i < m/2; i++)
+		delete[] B[i];
+	for (int i = 0; i < m; i++)
+		delete[] C[i];
+
+	delete[] A;
+	delete[] B;
+	delete[] C;
+
+	system("pause");
+	return 0;
+}

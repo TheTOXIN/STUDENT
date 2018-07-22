@@ -1,0 +1,95 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <time.h>
+
+using namespace std;
+
+int* X;
+int* Y;
+int N;
+
+void search_perimetr()
+{
+	double P = 0;
+	double max_P = 0;
+	int X1, X2, X3;
+	int Y1, Y2, Y3;
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = i+1; j < N; j++)
+		{
+			for (int k = j+1; k < N; k++)
+			{
+				double AB = sqrt(fabs(pow(X[i] - X[j], 2) - pow(Y[i] - Y[j], 2)));
+				double BC = sqrt(fabs(pow(X[j] - X[k], 2) - pow(Y[j] - Y[k], 2)));
+				double CA = sqrt(fabs(pow(X[k] - X[i], 2) - pow(Y[k] - Y[i], 2)));
+				P += AB + BC + CA;
+				if (P >= max_P)
+				{
+					max_P = P;
+					X1 = X[i], X2 = X[j], X3 = X[k];
+					Y1 = Y[i], Y2 = Y[j], Y3 = Y[k];
+				}
+			}
+		}
+	}
+	cout << "Точки составляющие треугольник с наибольшим периметром:" << endl;
+	cout << "X: " << X1 << ' ' << X2 << ' ' << X3 << endl;
+	cout << "Y: " << Y1 << ' ' << Y2 << ' ' << Y3 << endl;
+	cout << "P = " << max_P << endl;
+}
+
+void generate_points()
+{
+	cout << "Введите количество точек: " << endl;
+	cin >> N;
+	X = new int[N];
+	Y = new int[N];
+	
+	for (int i = 0; i < N; i++)
+	{
+		X[i] = rand() % 18 - 9;
+		Y[i] = rand() % 18 - 9;
+	}
+}
+
+void output_points()
+{
+	cout << "Координаты точек" << endl << "N: ";
+	for (int i = 0; i < N; i++)
+	{
+		cout.width(2);
+		cout << i+1 << ' ';
+	}
+	cout << endl;
+	cout << "X: ";
+	for (int i = 0; i < N; i++)
+	{
+		cout.width(2);
+		cout << X[i] << ' ';
+	}
+	cout << endl;
+	cout << "Y: ";
+	for (int i = 0; i < N; i++)
+	{
+		cout.width(2);
+		cout << Y[i] << ' ';
+	}
+	cout << endl;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	srand((unsigned)time(NULL));
+
+	generate_points();
+	output_points();
+	search_perimetr();
+
+	system("pause");
+	return 0;
+}

@@ -1,0 +1,161 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <time.h>
+
+using namespace std;
+
+int arr[1000];
+int len = 0;
+
+void showMenu()
+{
+	cout << "===Выберете пункт===" << endl;
+	cout << "1.Заполнить массив" << endl;
+	cout << "2.Создать массив" << endl;
+	cout << "3.Вывести массив" << endl;
+	cout << "4.Поиск элемента(Транспозиция)" << endl;
+	cout << "5.Поиск элемента(Перенос в начало)" << endl;
+	cout << "6.Выйти" << endl;
+}
+
+void inputArr()
+{
+	cout << "Введите размер: ";
+	cin >> len;
+
+	for (int i = 0; i < len; i++)
+	{
+		cout << "Введите " << i << " элемент: ";
+		cin >> arr[i];
+	}
+}
+
+void outputArr()
+{
+	cout << "Ваш массив: " << endl;
+	for (int i = 0; i < len; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+	system("pause");
+}
+
+void randomArr()
+{
+	cout << "Введите размер: ";
+	cin >> len;
+
+	for (int i = 0; i < len; i++)
+	{
+		arr[i] = rand() % 100;
+	}
+	outputArr();
+}
+
+int search()
+{
+	int s = -1;
+	for (int i = 0; i < len; i++)
+	{
+		if (i != 0 && i != len - 1)
+		{
+			int res = abs(arr[i - 1] - arr [i + 1]);
+			if (res % 2 == 0 && res % 3 == 0)
+			{
+				s = arr[i];
+			}
+		}
+	}
+
+	if (s == -1)
+	{
+		cout << "Элемент не найден!" << endl;
+	}
+
+	cout << "Элемент = " << s << " найден" << endl;
+
+	bool isFind = false;
+
+	for (int i = 0; i < len; i++)
+	{
+		if (arr[i] == s)
+		{
+			cout << "Элемент " << arr[i] << " на позиции - " << i << endl;
+			isFind = true;
+			return i;
+		}
+	}
+
+	if (!isFind)
+	{
+		cout << "Элемент не найден!" << endl;
+	}
+	system("pause");
+}
+
+void transposition()
+{
+	outputArr();
+
+	int pos = search();
+
+	if (pos == 0)
+		return;
+
+	int tmp = arr[pos - 1];
+	arr[pos - 1] = arr[pos];
+	arr[pos] = tmp;
+	system("pause");
+}
+
+void moveInStart()
+{
+	outputArr();
+
+	int pos = search();
+
+	if (pos == 0)
+		return;
+
+	int elm = arr[pos];
+
+	for (int i = pos - 1; i >= 0; i--)
+	{
+		arr[i + 1] = arr[i];
+	}
+
+	arr[0] = elm;
+	system("pause");
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	int c = 0;
+	while (c != 6)
+	{
+		showMenu();
+		cin >> c;
+		switch (c)
+		{
+		case 1: inputArr(); break;
+		case 2: randomArr(); break;
+		case 3: outputArr(); break;
+		case 4: transposition();  break;
+		case 5: moveInStart(); break;
+		default: "Попробуйте ещё раз...";
+		}
+		system("cls");
+	}
+
+	system("pause");
+	return 0;
+}

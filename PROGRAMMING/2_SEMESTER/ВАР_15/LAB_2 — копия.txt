@@ -1,0 +1,63 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
+
+using namespace std;
+
+struct Adress//тип данных adress
+{
+	char street_name[30];//у каждого адреса есть название улицы
+	int street_number;//и номер дома
+};
+
+struct Students//тип данных Students 
+{
+	char FIO[30];// у каждого студента есть фамилия
+	int number;//номер телефона
+	Adress adr;//тип данных Adress
+};
+
+void input(Students studArray[], int kol)//функция для ввода массива студентов
+{
+	for (int i = 0; i < kol; i++)
+		cin >> studArray[i].FIO >> studArray[i].number >> studArray[i].adr.street_name >> studArray[i].adr.street_number;
+	cout << endl;
+}
+
+void output(Students studArray[], int kol)//функция для вывода массива студентов
+{
+	for (int i = 0; i < kol; i++)
+		cout << studArray[i].FIO << ": Number phone - " << studArray[i].number << ", Addres - " 
+			<< studArray[i].adr.street_name << " " << studArray[i].adr.street_number << endl;
+	cout << endl;
+}
+
+int main()
+{
+	const int kol = 3;//кол-во студентов
+	Students studArray[kol];//массив студентов
+
+	cout << "Input: FIO, number, addres for " << kol << " students:" << endl;
+	input(studArray, kol);//вызываем функцию ввода массива студентов
+	cout << "ArrayList Students:" << endl;
+	output(studArray, kol);//вызываем функцию вывода массива студентов
+
+
+
+	cout << "Students without number phones: " << endl;
+	for (int i = 0; i < kol; i++)//прообегаемся по массиву студентов
+	{
+		if (studArray[i].number == 0)//если номер студента равен 0 то выводим его 
+		{
+			cout << studArray[i].FIO << ": Number phone - " << studArray[i].number 
+				<< ", Addres - " << studArray[i].adr.street_name << " " << studArray[i].adr.street_number << endl;
+		}
+	}
+
+	system("pause");
+	return 0;
+}

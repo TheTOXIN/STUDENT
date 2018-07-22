@@ -1,0 +1,81 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <time.h>
+
+using namespace std;
+
+template <class T>
+class Queue//класс очереди
+{
+public:
+	Queue(size_t size);//конструкторы
+	~Queue() { delete[] data; }
+	Queue(const Queue&) = delete;
+	Queue& operator=(const Queue&) = delete;//перегрузка присваивания
+
+	bool empty() const { return f_ == l_; }//проверки на размеры
+	bool full()  const { return (l_ + 1) % size == f_; }
+	int  first() const { return data[f_]; }//указатель на первый
+	int  last()  const { return data[l_]; }//указатель на первый 
+	int  pop(); //взятие элемента                            
+	bool enqueue(T value);//добавление
+
+	friend bool operator +=(Queue& ob, int d)//перегрузка добавления
+	{
+		return ob.enqueue(d);
+	}
+
+	friend Queue& operator --(Queue& ob)//перегрузка удаления
+	{
+		ob.pop();
+		return ob;
+	}
+
+private:
+	T * data;//элемент
+	size_t size;//рамзер
+	size_t f_, l_;//указатели
+};
+//реализации функций класса
+template <class T>
+Queue<T>::Queue(size_t size) :size(size)
+{
+	data = new int[size];
+	f_ = l_ = 0;
+}
+
+template <class T>
+int Queue<T>::pop()
+{
+	T x = data[f_];
+	f_ = (f_ + 1) % size;
+	return x;
+}
+
+template <class T>
+bool Queue<T>::enqueue(T value)
+{
+	if (full()) return false;
+	data[l_] = value;
+	l_ = (l_ + 1) % size;
+	return true;
+}
+
+int main(int argc, const char * argv[])
+{
+	int n = 0;
+	Queue<int> q(30);//создаем очередь
+	while (q.enqueue(n)) n++;//инициализиурем
+	for (; n <= 30; ++n)//заполняем
+	{
+		cout << q.pop() << " ";
+		q += n;
+	}
+	while (!q.empty()) cout << q.pop() << " ";//выводим
+
+	system("pause");
+	return 1;
+}

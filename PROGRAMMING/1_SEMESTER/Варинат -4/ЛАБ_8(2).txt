@@ -1,0 +1,69 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#include <locale.h>
+#include <windows.h>
+#include <time.h>
+
+using namespace std;
+
+void func_1(int * N, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		N[i] = rand() % 100;
+		cout << N[i] << " ";
+	}
+	cout << endl;
+}
+
+int func_2(int * N, int n)
+{
+	int count = 0;
+	int namber;
+	int a;
+	int tmp;
+	bool b = false;
+
+	for (int i = 0; i < n; i++)
+	{
+		namber = N[i];
+		a = namber % 10;
+		do
+		{
+			tmp = namber % 10;
+			namber = namber / 10;
+			if (tmp == a)
+			{
+				b = true;
+			}
+			else
+			{
+				b = false;
+				break;
+			}
+		} while (namber != 0);
+		if (b == true)
+		{
+			count++;
+		}
+	}
+	return count;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	srand((unsigned)time(NULL));
+
+	int n;
+	cout << "Введите размер массива: ";
+	cin >> n;
+	int* N = new int[n];
+	func_1(N, n);
+	int count = func_2(N, n);
+	cout << "Количество чисел с одинаковыми цифрами = " << count << endl;
+
+	system("pause");
+	return 0;
+}

@@ -1,0 +1,43 @@
+#include <iostream>
+
+#pragma argsused
+
+bool function(int p)
+{
+	bool b1 = false;
+
+	for (int i = 2; i < p; i++)
+	{
+		if (p % i == 0)
+			b1 = true;
+	}
+
+	if (b1 == false)
+	{
+		return true;
+	}
+	return false;
+	
+}
+
+int main()
+{
+	int count = 0;
+	int m, n;
+	cout << "Input interval m - n: " << endl;
+	cin >> m >> n;
+
+	cout << "Simple numbers: ";
+	for (int i = m; i <= n; i++)
+	{
+		if (function(i))
+		{
+			count++;
+			cout << i << " ";
+		}
+	}
+	cout << endl << "Ñount = " << count << endl;
+
+	getch();
+	return 0;
+}

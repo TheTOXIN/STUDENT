@@ -1,0 +1,52 @@
+#include "stdafx.h"
+#include "iostream"
+#include <math.h>
+#include "string"
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+const int n = 5;
+const int max = 80;
+string s = "text.txt";
+ofstream fout(s);
+ifstream fin(s);
+
+void input(string txt[n])
+{
+	for (int i = 0; i < n; i++)
+	{
+		cin >> txt[i];
+		fout << txt[i] << endl;
+	}
+	cout << endl;
+}
+
+void update(string txt[n])
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < max - txt[i].length(); j++)
+		{
+			txt[i] = " " + txt[i];
+		}
+		cout << txt[i] << endl;
+		fout << txt[i] << endl;
+	}
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	string txt[n];
+	cout << "Input text" << endl;
+	input(txt);
+	cout << "Update text" << endl;
+	update(txt);
+
+	system("pause");
+	return 0;
+}

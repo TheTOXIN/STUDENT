@@ -1,0 +1,252 @@
+//#include "stdafx.h" разкоменть если что подйет не так
+#include<iostream>
+#include<conio.h>
+#include<time.h>
+#include<windows.h>
+
+using namespace std;
+
+int arr[1000];//массив на 1000 элементов
+int len = 0;//длина для фиксирования массива
+
+void sortArray()//функция для сортировки массива 
+{
+	for (int i = 0; i < len - 1; i++)//сортируем методом пузырьком 
+	{
+		for (int j = i; j < len; j++)//через вложенные циклы
+		{
+			if (arr[i] > arr[j])
+			{
+				int tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
+		}
+	}
+}
+
+int lineSearch(int n)//функция линейного поиска
+{
+	int res = -1;
+	for (int i = 0; i < len; i++)//проходимся по массиву
+	{
+		if (arr[i] == n)//сравниваем элемент
+		{
+			res = i;
+			break;
+		}
+	}
+
+	return res;
+}
+
+int binarySearch(int n)//функция бинарного поиска
+{
+	sortArray();
+
+	int res = -1;
+
+	int g1 = 0, g2 = len - 1, i = g1;//делаем переменые для определения границ
+
+	while (g1 <= g2) //пока границы не сошлись ищем элемент по массиву
+	{
+		i = (g1 + g2) / 2;//каждый раз делим ммассив на 2 части
+
+		if (n > arr[i])//выбераем нужною сторону массива в зависимости от элемента
+		{
+			g1 = i + 1;
+		}
+		else if (n < arr[i])
+		{
+			g2 = i - 1;
+		}
+
+		if (arr[i] == n)
+		{
+			res = i;
+			break;
+		}
+	}
+
+	return res;
+}
+
+int indexSearch(int n)//индексный поиск
+{
+	sortArray();//сортируем массив
+
+	int res = -1;
+
+	int h = 3;//кол-во длений массива на таблицы
+	for (int i = h - 1; i < len; i += h)//пробегаемся по таблицам массива
+	{
+		if (n <= arr[i])//если мы попали в нужную таблицу
+		{
+			for (int j = i; j > i - h; j--)//то ищем элемент в этой таблице
+			{
+				if (arr[j] == n)
+				{
+					res = j;
+					break;
+				}
+			}
+		}
+	}
+
+	if (res == -1)//проверка для остатка массива если его длина не делится ровно на кол-во таблиц h
+	{
+		for (int i = len / h * h; i < len; i++)
+		{
+			if (arr[i] == n)
+			{
+				res = i;
+				break;
+			}
+		}
+	}
+
+	return res;
+}
+
+void showMenu()//печатаем меню
+{
+	system("cls");
+	cout << "===CHOOSE===" << endl;
+	cout << "1 = Input array" << endl;
+	cout << "2 = Random array" << endl;
+	cout << "3 = Print array" << endl;
+	cout << "4 = Search array" << endl;
+	cout << "5 = Exit" << endl;
+}
+
+void inputSize()//функция для ввода размера
+{
+	cout << "INPUT SIZE ARRAY: ";
+	cin >> len;
+	cout << endl;
+}
+
+void randomArray()//функция для заполнения массива
+{
+	cout << "RANDOM" << endl;
+	inputSize();
+
+	for (int i = 0; i < len; i++)
+	{
+		arr[i] = rand() % 100;
+	}
+
+	system("pause");
+}
+
+void inputArray()//функция для ввода массива
+{
+	cout << "INPUT" << endl;
+	inputSize();
+
+	int tmp;
+	for (int i = 0; i < len; i++)
+	{
+		cout << i << " = ";
+		cin >> tmp;
+		arr[i] = tmp;
+	}
+	cout << endl;
+
+	system("pause");
+}
+
+void printArray()//функция для вывода массива
+{
+	cout << "PRINT" << endl;
+
+	for (int i = 0; i < len; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+
+	system("pause");
+}
+
+void printResult(int n, int res)//функция для вывода результата поиска
+{
+	if (res != -1)
+	{
+		cout << n << " index = " << res << endl;
+	}
+}
+
+void searchArray()//функция для поиска элемнетов  кратных 3
+{
+	sortArray();//сортируем массив
+	int n, res;
+	int min = arr[0], max = arr[len - 1];//берем мин и макс массива
+	//для каждого вида поиска ищем элемент от min до max и выводим результат
+	cout << "LINE..." << endl;
+	for (int i = min; i < max; i++)
+	{
+		n = i;
+		if (n % 3 == 0)
+		{
+			res = lineSearch(n);
+			printResult(n, res);
+		}
+	}
+	cout << endl;
+
+	cout << "BINARY..." << endl;
+	for (int i = min; i < max; i++)
+	{
+		n = i;
+		if (n % 3 == 0)
+		{
+			res = binarySearch(n);
+			printResult(n, res);
+		}
+	}
+	cout << endl;
+
+	cout << "INDEX..." << endl;
+	for (int i = min; i < max; i++)
+	{
+		n = i;
+		if (n % 3 == 0)
+		{
+			res = indexSearch(n);
+			printResult(n, res);
+		}
+	}
+	cout << endl;
+
+	system("pause");
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	while (true)//логика меню
+	{
+		showMenu();
+
+		int choose;
+		cin >> choose;
+
+		switch (choose)
+		{
+		case 1: inputArray(); break;
+		case 2: randomArray(); break;
+		case 3: printArray(); break;
+		case 4: searchArray(); break;
+		case 5: system("esc"); break;
+		default: cout << "ERROR" << endl;
+		}
+	}
+
+	system("pause");
+	return 1;
+}
