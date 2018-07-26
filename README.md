@@ -1,3 +1,3 @@
 # STUDENT
 
-Laboratory work on c ++
+Laboratory work and term papers on c ++
